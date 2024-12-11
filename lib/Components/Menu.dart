@@ -22,7 +22,7 @@ class _MenuState extends State<Menu> {
       backgroundColor: Colors.white,
       child: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +37,7 @@ class _MenuState extends State<Menu> {
                       width: 45,
                     ),
                     const VerticalSpacer(space: 5),
-                    Column(
+                    const Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -157,7 +157,7 @@ class _MenuState extends State<Menu> {
                         width: 33,
                       ),
                       const HorizontalSpacer(space: 10),
-                      Column(
+                      const Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -198,7 +198,7 @@ openAddLabelDialog({required context}) {
     context: context,
     builder: (context) => SimpleDialog(
       title: const Text('New Label'),
-      contentPadding: EdgeInsets.symmetric(horizontal: 25),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 25),
       children: [
         const Text('Label Name'),
         const VerticalSpacer(space: 5),
@@ -259,7 +259,7 @@ openDeleteLabelDialog({required context}) {
     context: context,
     builder: (context) => SimpleDialog(
         title: const Text('are you sure want to delete?'),
-        contentPadding: EdgeInsets.symmetric(
+        contentPadding: const EdgeInsets.symmetric(
           horizontal: 25,
         ),
         children: [
@@ -306,7 +306,7 @@ openProfileDialog({required context}) {
   return showDialog(
     context: context,
     builder: (context) => SimpleDialog(
-        contentPadding: EdgeInsets.symmetric(
+        contentPadding: const EdgeInsets.symmetric(
           horizontal: 25,
         ),
         children: [
@@ -317,7 +317,7 @@ openProfileDialog({required context}) {
             width: 80,
           ),
           const VerticalSpacer(space: 20),
-          Text(
+          const Text(
             textAlign: TextAlign.center,
             'Welcome to Arfoon Note',
             style: TextStyle(
@@ -332,7 +332,7 @@ openProfileDialog({required context}) {
             height: 50,
             child: TextFormField(
               decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
                   // gapPadding: 5,
@@ -379,7 +379,7 @@ openSettingsDialog({required context}) {
               height: 60,
               width: 60,
             ),
-            Text(
+            const Text(
               'Arfoon Notes Settings',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -389,7 +389,7 @@ openSettingsDialog({required context}) {
             ),
           ],
         ),
-        contentPadding: EdgeInsets.symmetric(
+        contentPadding: const EdgeInsets.symmetric(
           horizontal: 25,
         ),
         children: [
@@ -402,7 +402,7 @@ openSettingsDialog({required context}) {
               const VerticalSpacer(space: 10),
               DropdownButtonFormField<String>(
                 items: languageDropDownItems,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 15,
                   color: Colors.black,
                   fontFamily: 'Rubik',
@@ -411,7 +411,7 @@ openSettingsDialog({required context}) {
                 iconEnabledColor: Colors.black,
                 isDense: true,
                 isExpanded: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   contentPadding: EdgeInsets.only(left: 5, top: 3),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black, width: 0.5),
@@ -432,7 +432,7 @@ openSettingsDialog({required context}) {
               const VerticalSpacer(space: 10),
               DropdownButtonFormField<String>(
                 items: themeDropDownItems,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 15,
                   color: Colors.black,
                   fontFamily: 'Rubik',
@@ -441,7 +441,7 @@ openSettingsDialog({required context}) {
                 iconEnabledColor: Colors.black,
                 isDense: true,
                 isExpanded: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   contentPadding: EdgeInsets.only(left: 5, top: 3),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black, width: 0.5),

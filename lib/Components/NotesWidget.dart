@@ -19,8 +19,8 @@ class NotesWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          padding: EdgeInsets.all(12),
-          margin: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(12),
+          margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
               color: notes['pinned'] == 'true' ? Colors.blue : Colors.grey[200],
               borderRadius: BorderRadius.circular(20)),
@@ -63,7 +63,7 @@ class NotesWidget extends StatelessWidget {
                 children: [
                   for (var item in notes['techs'])
                     Container(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: notes['pinned'] == 'true'
@@ -72,7 +72,7 @@ class NotesWidget extends StatelessWidget {
                       ),
                       child: Text(
                         item,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w400,
                             fontSize: 12),

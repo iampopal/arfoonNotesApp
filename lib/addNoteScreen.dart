@@ -37,7 +37,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                     child: SvgPicture.asset(AppAssets.arrowForward)),
             widget.isPhone
                 ? const SizedBox()
-                : Text(
+                : const Text(
                     'Untitled',
                     style: TextStyle(fontSize: 10),
                   )
@@ -79,7 +79,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                         color: Colors.black,
                       ),
                       const HorizontalSpacer(space: 10),
-                      Text(
+                      const Text(
                         'Save Changes',
                         style: TextStyle(
                           fontSize: 10,

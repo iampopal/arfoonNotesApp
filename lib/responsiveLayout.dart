@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class ResponsiveLayout extends StatefulWidget {
   const ResponsiveLayout({super.key});
@@ -12,8 +11,8 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, Constraints) {
-        return Placeholder();
+      builder: (context, constraints) {
+        return const Placeholder();
       },
     );
   }
