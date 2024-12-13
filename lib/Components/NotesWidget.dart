@@ -22,8 +22,9 @@ class NotesWidget extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-              color: notes['pinned'] == 'true' ? Colors.blue : Colors.grey[200],
-              borderRadius: BorderRadius.circular(20)),
+            color: notes['pinned'] == 'true' ? Colors.blue : Colors.grey[200],
+            borderRadius: BorderRadius.circular(20),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,5 +1,6 @@
 import 'package:afroon_test_project/AppData/appData.dart';
 import 'package:afroon_test_project/Components/ExampleWidget.dart';
+import 'package:afroon_test_project/Components/Menu.dart';
 import 'package:afroon_test_project/homeExampleScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -62,11 +63,18 @@ class _MyHomePageState extends State<MyHomePage> {
                         onTap: () {
                           if (int.parse(data['index']) == 0) {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const HomeExampleScreen()));
-                          }
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HomeExampleScreen(),
+                              ),
+                            );
+                          } else if (int.parse(data['index']) == 1) {
+                            openProfileDialog(context: context);
+                          } else if (int.parse(data['index']) == 2) {
+                            openSettingsDialog(context: context);
+                          } else if (int.parse(data['index']) == 3) {
+                            openAddLabelDialog(context: context);
+                          } else {}
                         },
                         child: ExampleWidget(data: data)))
                     .toList(),

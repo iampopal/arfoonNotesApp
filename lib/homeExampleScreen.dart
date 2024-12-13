@@ -1,13 +1,13 @@
 // ignore_for_file: file_names
 
 import 'dart:io';
+import 'package:afroon_test_project/Components/Shimmers/homeExampleShimmer.dart';
 import 'package:afroon_test_project/addNoteScreen.dart';
 import 'package:afroon_test_project/Components/Space/HorizontalSpacer.dart';
 import 'package:afroon_test_project/Components/Space/VerticalSpacer.dart';
 import 'package:afroon_test_project/Helpers/appAssets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'AppData/appData.dart';
 import 'Components/FiltersWidget.dart';
 import 'Components/Menu.dart';
@@ -44,7 +44,7 @@ class _HomeExampleScreenState extends State<HomeExampleScreen> {
               centerTitle: true,
               title: const Text('Arfoon Notes'),
             ),
-            body: const HomeExampleView(
+            body: HomeExampleView(
               isPhone: true,
             ),
             floatingActionButton: FloatingActionButton(
@@ -64,16 +64,32 @@ class _HomeExampleScreenState extends State<HomeExampleScreen> {
   }
 }
 
-class HomeExampleView extends StatelessWidget {
+class HomeExampleView extends StatefulWidget {
   final bool isPhone;
-  const HomeExampleView({super.key, required this.isPhone});
+  bool isLoading = true;
+  HomeExampleView({super.key, required this.isPhone});
+
+  @override
+  State<HomeExampleView> createState() => _HomeExampleViewState();
+}
+
+class _HomeExampleViewState extends State<HomeExampleView> {
+  @override
+  initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      setState(() {
+        widget.isLoading = false;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          isPhone
+          widget.isPhone
               ? const Visibility(
                   visible: false,
                   child: SizedBox(),
@@ -137,19 +153,21 @@ class HomeExampleView extends StatelessWidget {
             ),
           ),
           const VerticalSpacer(space: 20),
-          Column(
-            children: AppData()
-                .notes
-                .asMap()
-                .map((i, element) => MapEntry(
-                    i,
-                    NotesWidget(
-                      notes: element,
-                      currentIndex: i,
-                    )))
-                .values
-                .toList(),
-          )
+          widget.isLoading
+              ? const HomeExampleShimmer()
+              : Column(
+                  children: AppData()
+                      .notes
+                      .asMap()
+                      .map((i, element) => MapEntry(
+                          i,
+                          NotesWidget(
+                            notes: element,
+                            currentIndex: i,
+                          )))
+                      .values
+                      .toList(),
+                )
         ],
       ),
     );
@@ -199,7 +217,7 @@ class HomeDesktopView extends StatelessWidget {
                   border: Border(
                 right: BorderSide(width: 0.3),
               )),
-              child: const HomeExampleView(
+              child: HomeExampleView(
                 isPhone: false,
               ),
             ),
