@@ -102,12 +102,12 @@ class _HomeExampleViewState extends State<HomeExampleView> {
               ? const HomeExampleShimmer()
               : Column(
                   children: FakeData()
-                      .fakeNotes
+                      .notes
                       .asMap()
                       .map((i, element) => MapEntry(
                           i,
                           NotesWidget(
-                            notes: element,
+                            note: element,
                             currentIndex: i,
                           )))
                       .values

@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
+import 'package:arfoon_note/client/client.dart';
 import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
-import 'package:arfoon_note/frontend/frontend.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +8,9 @@ import 'package:flutter_svg/svg.dart';
 
 class NotesWidget extends StatelessWidget {
   final int currentIndex;
-  final Map<String, dynamic> notes;
+  final Note note;
   const NotesWidget(
-      {super.key, required this.notes, required this.currentIndex});
+      {super.key, required this.note, required this.currentIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class NotesWidget extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: notes['pinned'] == 'true' ? Colors.blue : Colors.grey[200],
+            color: note.pinned ?? false ? Colors.blue : Colors.grey[200],
             borderRadius: BorderRadius.circular(20),
           ),
           child: Column(
@@ -28,28 +28,25 @@ class NotesWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                notes['date'],
+                note.date ?? '',
                 style: TextStyle(
-                  color:
-                      notes['pinned'] == 'true' ? Colors.white : Colors.black,
+                  color: note.pinned ?? false ? Colors.white : Colors.black,
                 ),
               ),
               const VerticalSpacer(space: 6),
               Text(
-                notes['title'],
+                note.title ?? '',
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
-                  color:
-                      notes['pinned'] == 'true' ? Colors.white : Colors.black,
+                  color: note.pinned ?? false ? Colors.white : Colors.black,
                   fontSize: 23,
                 ),
               ),
               const VerticalSpacer(space: 6),
               Text(
-                notes['note'],
+                note.details ?? '',
                 style: TextStyle(
-                  color:
-                      notes['pinned'] == 'true' ? Colors.white : Colors.black,
+                  color: note.pinned ?? false ? Colors.white : Colors.black,
                   fontSize: 13,
                 ),
               ),
@@ -60,12 +57,12 @@ class NotesWidget extends StatelessWidget {
               // ),
               Row(
                 children: [
-                  for (var item in notes['techs'])
+                  for (var item in note.techs ?? [])
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: notes['pinned'] == 'true'
+                        color: note.pinned ?? false
                             ? Colors.white
                             : Colors.grey[300],
                       ),
@@ -89,28 +86,21 @@ class NotesWidget extends StatelessWidget {
             onTap: () {
               if (kDebugMode) {
                 print(currentIndex);
-                print(FakeData().fakeNotes[currentIndex]['pinned']);
-                FakeData().fakeNotes[currentIndex]['pinned'] = 'true';
-                // AppData().notes[currentIndex]['pinned'] = 'true';
-                print(FakeData().fakeNotes[currentIndex]['pinned']);
+                print(note.pinned);
               }
             },
             child: Container(
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: FakeData().fakeNotes[currentIndex]['pinned'] == 'true'
-                    ? Colors.black
-                    : Colors.white,
+                color: note.pinned ?? false ? Colors.black : Colors.white,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Container(
                 alignment: Alignment.center,
                 child: SvgPicture.asset(
                   AppAssets.pinOutlined,
-                  color: FakeData().fakeNotes[currentIndex]['pinned'] == 'true'
-                      ? Colors.white
-                      : Colors.black,
+                  color: note.pinned ?? false ? Colors.white : Colors.black,
                   height: 15,
                   width: 15,
                 ),

@@ -3,13 +3,32 @@ import 'package:arfoon_note/client/client.dart';
 class FakeData {
   final notes = [
     Note(
-      title: 'Halo',
+      date: '12 Sep',
+      title: 'Exploring Ideas',
+      details:
+          'Exploring Ideas is the cornerstone of innovation and progress its the process of venturing beyond the familiar, questioning assumption, and mbrace...techs',
+      techs: ['office'],
+      pinned: true,
       labelIds: [],
     ),
     Note(
-      title: 'Halo 2',
+      date: '12 Sep',
+      title: 'Exploring Ideas',
+      details:
+          'Exploring Ideas is the cornerstone of innovation and progress its the process of venturing beyond the familiar, questioning assumption, and mbrace...techs',
+      techs: ['office', 'Design'],
+      pinned: false,
       labelIds: [],
-    )
+    ),
+    Note(
+      date: '12 Sep',
+      title: 'Exploring Ideas',
+      details:
+          'Exploring Ideas is the cornerstone of innovation and progress its the process of venturing beyond the familiar, questioning assumption, and mbrace...techs',
+      techs: ['office'],
+      pinned: false,
+      labelIds: [],
+    ),
   ];
   List<Map<String, dynamic>> filters = [
     {'title': 'All Notes'},
@@ -17,33 +36,6 @@ class FakeData {
     {'title': 'Office'},
     {'title': 'Note'},
     {'title': 'Office'}
-  ];
-
-  List<Map<String, dynamic>> fakeNotes = [
-    {
-      'date': '12 Sep',
-      'title': 'Exploring Ideas',
-      'pinned': 'true',
-      'note':
-          'Exploring Ideas is the cornerstone of innovation and progress its the process of venturing beyond the familiar, questioning assumption, and mbrace...',
-      'techs': ['office']
-    },
-    {
-      'date': '12 Sep',
-      'title': 'Exploring Ideas',
-      'pinned': 'false',
-      'note':
-          'Exploring Ideas is the cornerstone of innovation and progress its the process of venturing beyond the familiar, questioning assumption, and mbrace...',
-      'techs': ['office', 'Design']
-    },
-    {
-      'date': '12 Sep',
-      'title': 'Exploring Ideas',
-      'pinned': 'false',
-      'note':
-          'Exploring Ideas is the cornerstone of innovation and progress its the process of venturing beyond the familiar, questioning assumption, and mbrace...',
-      'techs': ['office', 'Design']
-    }
   ];
 
   List<String> menuTitles = ['Office', 'Home', 'Design', 'Code', 'To Learn'];
