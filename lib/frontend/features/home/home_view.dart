@@ -9,8 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
-
+  const HomeView({
+    super.key,
+  });
+  
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();

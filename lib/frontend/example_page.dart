@@ -39,7 +39,8 @@ class _MyHomePageState extends State<ExamplePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: FakeData()
                     .examplesData
-                    .map((data) => InkWell(
+                    .map(
+                      (data) => InkWell(
                         splashColor: Colors.black12,
                         onTap: () {
                           if (int.parse(data['index']) == 0) {
@@ -57,7 +58,9 @@ class _MyHomePageState extends State<ExamplePage> {
                             Utils().openAddLabelDialog(context: context);
                           } else {}
                         },
-                        child: ExampleWidget(data: data)))
+                        child: ExampleWidget(data: data),
+                      ),
+                    )
                     .toList(),
               ),
             ],

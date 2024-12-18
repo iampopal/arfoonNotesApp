@@ -1,5 +1,5 @@
 
-# Project Sturucure
+# Project Sturucure ZAKI
 
 The `lib` folder contains the main source code for the application, organized into several packages and files. Below is a guide that outlines the structure and purpose of each component within the `lib` folder.
 
