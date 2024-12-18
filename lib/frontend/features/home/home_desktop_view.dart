@@ -1,5 +1,8 @@
+import 'package:arfoon_note/client/models/filter.dart';
+import 'package:arfoon_note/client/models/label.dart';
+import 'package:arfoon_note/client/models/note.dart';
 import 'package:arfoon_note/frontend/components/HorizontalSpacer.dart';
-import 'package:arfoon_note/frontend/features/home/home_example.dart';
+import 'package:arfoon_note/frontend/features/home/notes_list.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/widgets/add_notes_widget.dart';
 import 'package:arfoon_note/frontend/widgets/menu.dart';
@@ -7,7 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HomeDesktopView extends StatelessWidget {
-  const HomeDesktopView({super.key});
+  const HomeDesktopView({
+    super.key,
+    this.onNewLabel,
+    required this.getNotes,
+  });
+  final Future<Label?> Function()? onNewLabel;
+  final Future<List<Note>> Function(Filter filter) getNotes;
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +48,9 @@ class HomeDesktopView extends StatelessWidget {
       body: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          const Expanded(
+          Expanded(
             flex: 3,
-            child: Menu(),
+            child: Menu(onNewLabel: onNewLabel),
           ),
           Expanded(
             flex: 3,
@@ -50,9 +59,7 @@ class HomeDesktopView extends StatelessWidget {
                   border: Border(
                 right: BorderSide(width: 0.3),
               )),
-              child: HomeExampleView(
-                isPhone: false,
-              ),
+              child: NotesList(isPhone: false, getNotes: getNotes),
             ),
           ),
           const Expanded(

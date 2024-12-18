@@ -4,9 +4,15 @@ import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
 import 'package:flutter/material.dart';
 
 class ExampleWidget extends StatefulWidget {
-  final Map<String, dynamic> data;
-  const ExampleWidget({super.key, required this.data});
+  const ExampleWidget({
+    super.key,
+    // required this.title,
+    // required this.subtitle,
+    required this.data,
+  });
 
+  // final String title, subtitle;
+  final Map data;
   bool isIndexEven(int num) {
     if ((num %= 2) == 0) {
       return true;
@@ -26,7 +32,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
           ? Colors.white.withOpacity(0.1)
           : Colors.white10,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-      width: MediaQuery.of(context).size.width,
+      // width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

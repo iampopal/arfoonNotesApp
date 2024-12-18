@@ -1,4 +1,6 @@
 import 'package:arfoon_note/frontend/frontend.dart';
+import 'package:arfoon_note/frontend/utils/add_edit_label_dialog.dart';
+import 'package:arfoon_note/integration/constants.dart';
 import 'package:flutter/widgets.dart';
 
 class HomePage extends StatelessWidget {
@@ -6,6 +8,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const HomeView();
+    return HomeView(
+      getNotes: (filter) async {
+        return api.notes.list();
+      },
+      onNewLabel: () async {
+        AddEditLabelDialog(
+          onSubmit: (l) async {
+            return api.labels.insert(l);
+          },
+        ).show(context: context);
+      },
+    ); // return const HomeView();
   }
 }

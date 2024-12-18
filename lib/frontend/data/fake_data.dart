@@ -4,7 +4,7 @@ class FakeData {
   final notes = [
     Note(
       date: '12 Sep',
-      title: 'Exploring Ideas',
+      title: 'Exploring Ideas ahmad',
       details:
           'Exploring Ideas is the cornerstone of innovation and progress its the process of venturing beyond the familiar, questioning assumption, and mbrace...techs',
       techs: ['office'],
@@ -13,10 +13,55 @@ class FakeData {
     ),
     Note(
       date: '12 Sep',
-      title: 'Exploring Ideas',
+      title: 'Exploring Ideas mahmood',
       details:
           'Exploring Ideas is the cornerstone of innovation and progress its the process of venturing beyond the familiar, questioning assumption, and mbrace...techs',
       techs: ['office', 'Design'],
+      pinned: false,
+      labelIds: [],
+    ),
+    Note(
+      date: '12 Sep',
+      title: 'Exploring Ideas',
+      details:
+          'Exploring Ideas is the cornerstone of innovation and progress its the process of venturing beyond the familiar, questioning assumption, and mbrace...techs',
+      techs: ['office'],
+      pinned: false,
+      labelIds: [],
+    ),
+    Note(
+      date: '12 Sep',
+      title: 'Exploring Ideas',
+      details:
+          'Exploring Ideas is the cornerstone of innovation and progress its the process of venturing beyond the familiar, questioning assumption, and mbrace...techs',
+      techs: ['office'],
+      pinned: false,
+      labelIds: [],
+    ),
+    Note(
+      date: '12 Sep',
+      title: 'Exploring Ideas',
+      details:
+          'Exploring Ideas is the cornerstone of innovation and progress its the process of venturing beyond the familiar, questioning assumption, and mbrace...techs',
+      techs: ['office'],
+      pinned: false,
+      labelIds: [],
+    ),
+    Note(
+      date: '12 Sep',
+      title: 'Exploring Ideas',
+      details:
+          'Exploring Ideas is the cornerstone of innovation and progress its the process of venturing beyond the familiar, questioning assumption, and mbrace...techs',
+      techs: ['office'],
+      pinned: false,
+      labelIds: [],
+    ),
+    Note(
+      date: '12 Sep',
+      title: 'Exploring Ideas',
+      details:
+          'Exploring Ideas is the cornerstone of innovation and progress its the process of venturing beyond the familiar, questioning assumption, and mbrace...techs',
+      techs: ['office'],
       pinned: false,
       labelIds: [],
     ),
@@ -40,7 +85,7 @@ class FakeData {
 
   List<String> menuTitles = ['Office', 'Home', 'Design', 'Code', 'To Learn'];
 
-  List<Map<String, dynamic>> examplesData = [
+  static List<Map<String, dynamic>> examplesData = [
     {
       'index': '0',
       'title': 'HomeExample',

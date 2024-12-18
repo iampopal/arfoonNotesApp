@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:arfoon_note/client/models/label.dart';
 import 'package:arfoon_note/frontend/components/HorizontalSpacer.dart';
 import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
 import 'package:arfoon_note/frontend/frontend.dart';
@@ -8,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Menu extends StatefulWidget {
-  const Menu({super.key});
-
+  const Menu({super.key, this.onNewLabel});
+  final Future<Label?> Function()? onNewLabel;
   @override
   State<Menu> createState() => _MenuState();
 }
@@ -108,23 +109,26 @@ class _MenuState extends State<Menu> {
                   ],
                 ),
                 const VerticalSpacer(space: 50),
-                ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                if (widget.onNewLabel != null)
+                  ListTile(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    style: ListTileStyle.list,
+                    tileColor: Colors.white,
+                    title: const Text('Add Label'),
+                    leading: SvgPicture.asset(
+                      AppAssets.addLabel,
+                      height: 22,
+                      width: 22,
+                      color: Colors.black,
+                    ),
+                    onTap: () {
+                      widget.onNewLabel?.call().then((v) {
+                        //todo: if save label then get labels form db
+                      });
+                    },
                   ),
-                  style: ListTileStyle.list,
-                  tileColor: Colors.white,
-                  title: const Text('Add Label'),
-                  leading: SvgPicture.asset(
-                    AppAssets.addLabel,
-                    height: 22,
-                    width: 22,
-                    color: Colors.black,
-                  ),
-                  onTap: () {
-                    Utils().openAddLabelDialog(context: context);
-                  },
-                ),
                 const VerticalSpacer(space: 10),
                 ListTile(
                   shape: RoundedRectangleBorder(

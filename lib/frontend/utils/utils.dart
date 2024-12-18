@@ -1,3 +1,4 @@
+import 'package:arfoon_note/client/client.dart';
 import 'package:arfoon_note/frontend/components/HorizontalSpacer.dart';
 import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
@@ -5,67 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Utils {
-  openAddLabelDialog({required context}) {
-    return showDialog(
-      context: context,
-      builder: (context) => SimpleDialog(
-        title: const Text('New Label'),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 25),
-        children: [
-          const Text('Label Name'),
-          const VerticalSpacer(space: 5),
-          SizedBox(
-            // width: MediaQuery.of(context).size.width,
-            height: 55,
-            child: TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  gapPadding: 10,
-                ),
-                prefixIcon: const Icon(
-                  Icons.search,
-                ),
-                hintText: 'Create Label Name',
-              ),
-            ),
-          ),
-          const VerticalSpacer(space: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  openDeleteLabelDialog(context: context);
-                },
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(Colors.white70),
-                  foregroundColor: WidgetStateProperty.all(Colors.black),
-                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                ),
-                child: const Text('Delete'),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(Colors.black),
-                  foregroundColor: WidgetStateProperty.all(Colors.white),
-                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                ),
-                child: const Text('Save Label'),
-              ),
-            ],
-          ),
-          const VerticalSpacer(space: 15),
-        ],
-      ),
-    );
-  }
-
   openDeleteLabelDialog({required context}) {
     return showDialog(
       context: context,
