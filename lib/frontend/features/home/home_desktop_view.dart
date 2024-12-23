@@ -14,9 +14,12 @@ class HomeDesktopView extends StatelessWidget {
     super.key,
     this.onNewLabel,
     required this.getNotes,
+    required this.getLabels,
   });
   final Future<Label?> Function()? onNewLabel;
-  final Future<List<Note>> Function(Filter filter) getNotes;
+  final Future<List<Note>> Function(Filter filter, bool isSearchedByLabel)
+      getNotes;
+  final Future<List<Label>> Function(Filter filter) getLabels;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +62,11 @@ class HomeDesktopView extends StatelessWidget {
                   border: Border(
                 right: BorderSide(width: 0.3),
               )),
-              child: NotesList(isPhone: false, getNotes: getNotes),
+              child: NotesList(
+                isPhone: false,
+                getNotes: getNotes,
+                getLabels: getLabels,
+              ),
             ),
           ),
           const Expanded(

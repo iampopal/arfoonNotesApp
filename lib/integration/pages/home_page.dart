@@ -9,7 +9,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HomeView(
-      getNotes: (filter) async {
+      getLabels: (filter) async {
+        return api.labels.list();
+      },
+      getNotes: (filter, isSearchedByLabel) async {
         return api.notes.list();
       },
       onNewLabel: () async {

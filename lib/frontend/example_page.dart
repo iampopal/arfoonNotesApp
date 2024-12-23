@@ -18,8 +18,15 @@ class _MyHomePageState extends State<ExamplePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
+        titleTextStyle: const TextStyle(
+          color: Colors.black,
+          fontSize: 30,
+          fontWeight: FontWeight.bold,
+        ),
         title: const Text('Examples'),
+        elevation: 0,
       ),
       body: ListView(
         children: [
@@ -33,7 +40,10 @@ class _MyHomePageState extends State<ExamplePage> {
                 ),
               );
             },
-            child: ExampleWidget(data: FakeData.examplesData[0]),
+            child: ExampleWidget(
+              data: FakeData().examplesData[0],
+              currentIndex: 0,
+            ),
           ),
           InkWell(
             splashColor: Colors.black12,
@@ -42,18 +52,26 @@ class _MyHomePageState extends State<ExamplePage> {
                 onSubmit: (label) async {
                   await Future.delayed(const Duration(seconds: 1));
                   // Navigator.pop(context);
-                  print(label);
+                  if (kDebugMode) {
+                    print(label);
+                  }
                 },
               ).show(context: context);
             },
-            child: ExampleWidget(data: FakeData.examplesData[1]),
+            child: ExampleWidget(
+              data: FakeData().examplesData[1],
+              currentIndex: 1,
+            ),
           ),
           InkWell(
             splashColor: Colors.black12,
             onTap: () {
               const OpenSettingsDialog().show(context: context);
             },
-            child: ExampleWidget(data: FakeData.examplesData[2]),
+            child: ExampleWidget(
+              data: FakeData().examplesData[2],
+              currentIndex: 2,
+            ),
           ),
           InkWell(
             splashColor: Colors.black12,
@@ -68,12 +86,18 @@ class _MyHomePageState extends State<ExamplePage> {
                 },
               ).show(context: context);
             },
-            child: ExampleWidget(data: FakeData.examplesData[3]),
+            child: ExampleWidget(
+              data: FakeData().examplesData[3],
+              currentIndex: 3,
+            ),
           ),
           InkWell(
             splashColor: Colors.black12,
             onTap: () {},
-            child: ExampleWidget(data: FakeData.examplesData[4]),
+            child: ExampleWidget(
+              data: FakeData().examplesData[4],
+              currentIndex: 4,
+            ),
           ),
         ],
       ),

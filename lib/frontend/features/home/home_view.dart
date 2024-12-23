@@ -1,10 +1,10 @@
-
 import 'package:arfoon_note/client/client.dart';
 import 'package:arfoon_note/frontend/features/home/notes_list.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/widgets/add_notes_widget.dart';
 import 'package:arfoon_note/frontend/widgets/menu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
 
 extension ContextExt on BuildContext {
@@ -16,9 +16,12 @@ class HomeView extends StatefulWidget {
     super.key,
     this.onNewLabel,
     required this.getNotes,
+    required this.getLabels,
   });
   final Future<Label?> Function()? onNewLabel;
-  final Future<List<Note>> Function(Filter filter) getNotes;
+  final Future<List<Note>> Function(Filter filter, bool isSearchedByLabel)
+      getNotes;
+  final Future<List<Label>> Function(Filter filter) getLabels;
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -35,6 +38,7 @@ class _HomeViewState extends State<HomeView> {
       key: key,
       drawer: const Menu(),
       appBar: AppBar(
+        elevation: 0,
         leading: InkWell(
           onTap: () {
             key.currentState?.openDrawer();
@@ -47,11 +51,17 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
         centerTitle: true,
-        title: const Text('Arfoon Notes'),
+        title: Text(Locales.string(context,"Arfoon Notes")),
+        titleTextStyle: const TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+          fontSize: 30,
+        ),
       ),
       body: NotesList(
         isPhone: true,
         getNotes: widget.getNotes,
+        getLabels: widget.getLabels,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

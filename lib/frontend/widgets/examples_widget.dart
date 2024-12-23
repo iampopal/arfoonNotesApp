@@ -1,18 +1,18 @@
 // ignore_for_file: file_names
 
+import 'package:arfoon_note/client/models/examples_data.dart';
 import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
 import 'package:flutter/material.dart';
 
 class ExampleWidget extends StatefulWidget {
   const ExampleWidget({
     super.key,
-    // required this.title,
-    // required this.subtitle,
     required this.data,
+    required this.currentIndex,
   });
 
-  // final String title, subtitle;
-  final Map<String, dynamic> data;
+  final ExamplesData data;
+  final int currentIndex;
   bool isIndexEven(int num) {
     if ((num %= 2) == 0) {
       return true;
@@ -28,7 +28,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: widget.isIndexEven(int.parse(widget.data['index']))
+      color: widget.isIndexEven(widget.currentIndex)
           ? Colors.white.withOpacity(0.1)
           : Colors.white10,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
@@ -39,7 +39,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
         children: [
           const VerticalSpacer(space: 5),
           Text(
-            widget.data['title'],
+            widget.data.title ?? "",
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
@@ -48,7 +48,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
           ),
           const VerticalSpacer(space: 5),
           Text(
-            widget.data['subtitle'],
+            widget.data.subTitle ?? '',
             style: const TextStyle(
               fontWeight: FontWeight.w400,
               color: Colors.black,

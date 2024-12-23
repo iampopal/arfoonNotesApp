@@ -1,4 +1,7 @@
+import 'package:arfoon_note/theme/dark_theme.dart';
+import 'package:arfoon_note/theme/light_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 
 class FrontendApp extends StatelessWidget {
   const FrontendApp({super.key, required this.home});
@@ -6,14 +9,22 @@ class FrontendApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Arfoon Note',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
-        useMaterial3: true,
+    return LocaleBuilder(
+      builder: (locale) => MaterialApp(
+        localizationsDelegates: Locales.delegates,
+        supportedLocales: Locales.supportedLocales,
+        locale: locale,
+        debugShowCheckedModeBanner: false,
+        title: 'Arfoon Note',
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        // ThemeData(
+        //   colorScheme: ColorScheme.fromSeed(
+        //       seedColor: Colors.black, primary: Colors.white),
+        //   useMaterial3: false,
+        // ),
+        home: home,
       ),
-      home: home,
     );
   }
 }
