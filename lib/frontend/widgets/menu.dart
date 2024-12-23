@@ -32,12 +32,10 @@ class _MenuState extends State<Menu> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
+          child: ListView(
+            shrinkWrap: true,
             children: [
-              // VerticalSpacer(space: 40),
-              Row(
+               Row(
                 children: [
                   GestureDetector(
                     onTap: () {
