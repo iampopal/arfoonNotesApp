@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   if (kReleaseMode) {
-    runApp(const FrontendApp(home: MainApp()));
+    runApp(const MainApp());
     return;
   }
   runApp(const FrontendApp(home: ExamplePage()));

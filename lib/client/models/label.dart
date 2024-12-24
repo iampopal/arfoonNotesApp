@@ -7,6 +7,8 @@ class Label {
   Id? id = Isar.autoIncrement;
   String name;
   String? details;
+  bool? pinned;
+
   Label({
     this.id,
     required this.name,

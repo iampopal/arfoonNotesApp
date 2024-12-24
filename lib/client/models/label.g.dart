@@ -26,6 +26,11 @@ const LabelSchema = CollectionSchema(
       id: 1,
       name: r'name',
       type: IsarType.string,
+    ),
+    r'pinned': PropertySchema(
+      id: 2,
+      name: r'pinned',
+      type: IsarType.bool,
     )
   },
   estimateSize: _labelEstimateSize,
@@ -66,6 +71,7 @@ void _labelSerialize(
 ) {
   writer.writeString(offsets[0], object.details);
   writer.writeString(offsets[1], object.name);
+  writer.writeBool(offsets[2], object.pinned);
 }
 
 Label _labelDeserialize(
@@ -79,6 +85,7 @@ Label _labelDeserialize(
     id: id,
     name: reader.readString(offsets[1]),
   );
+  object.pinned = reader.readBoolOrNull(offsets[2]);
   return object;
 }
 
@@ -93,6 +100,8 @@ P _labelDeserializeProp<P>(
       return (reader.readStringOrNull(offset)) as P;
     case 1:
       return (reader.readString(offset)) as P;
+    case 2:
+      return (reader.readBoolOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -527,6 +536,31 @@ extension LabelQueryFilter on QueryBuilder<Label, Label, QFilterCondition> {
       ));
     });
   }
+
+  QueryBuilder<Label, Label, QAfterFilterCondition> pinnedIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'pinned',
+      ));
+    });
+  }
+
+  QueryBuilder<Label, Label, QAfterFilterCondition> pinnedIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'pinned',
+      ));
+    });
+  }
+
+  QueryBuilder<Label, Label, QAfterFilterCondition> pinnedEqualTo(bool? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'pinned',
+        value: value,
+      ));
+    });
+  }
 }
 
 extension LabelQueryObject on QueryBuilder<Label, Label, QFilterCondition> {}
@@ -555,6 +589,18 @@ extension LabelQuerySortBy on QueryBuilder<Label, Label, QSortBy> {
   QueryBuilder<Label, Label, QAfterSortBy> sortByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Label, Label, QAfterSortBy> sortByPinned() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'pinned', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Label, Label, QAfterSortBy> sortByPinnedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'pinned', Sort.desc);
     });
   }
 }
@@ -595,6 +641,18 @@ extension LabelQuerySortThenBy on QueryBuilder<Label, Label, QSortThenBy> {
       return query.addSortBy(r'name', Sort.desc);
     });
   }
+
+  QueryBuilder<Label, Label, QAfterSortBy> thenByPinned() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'pinned', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Label, Label, QAfterSortBy> thenByPinnedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'pinned', Sort.desc);
+    });
+  }
 }
 
 extension LabelQueryWhereDistinct on QueryBuilder<Label, Label, QDistinct> {
@@ -609,6 +667,12 @@ extension LabelQueryWhereDistinct on QueryBuilder<Label, Label, QDistinct> {
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'name', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Label, Label, QDistinct> distinctByPinned() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'pinned');
     });
   }
 }
@@ -629,6 +693,12 @@ extension LabelQueryProperty on QueryBuilder<Label, Label, QQueryProperty> {
   QueryBuilder<Label, String, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'name');
+    });
+  }
+
+  QueryBuilder<Label, bool?, QQueryOperations> pinnedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'pinned');
     });
   }
 }
