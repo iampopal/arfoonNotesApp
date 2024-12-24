@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:arfoon_note/client/models/filter.dart';
 import 'package:arfoon_note/client/models/label.dart';
 import 'package:arfoon_note/client/models/note.dart';
@@ -9,22 +11,43 @@ import 'package:arfoon_note/frontend/widgets/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class HomeDesktopView extends StatelessWidget {
-  const HomeDesktopView({
+class HomeTabletView extends StatefulWidget {
+  const HomeTabletView({
     super.key,
     this.onNewLabel,
     required this.getNotes,
     required this.getLabels,
   });
+
   final Future<Label?> Function()? onNewLabel;
   final Future<List<Note>> Function(Filter filter, bool isSearchedByLabel)
       getNotes;
   final Future<List<Label>> Function(Filter filter) getLabels;
 
   @override
+  State<HomeTabletView> createState() => _HomeTabletViewState();
+}
+
+class _HomeTabletViewState extends State<HomeTabletView> {
+  final GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: key,
+      drawer: const Menu(),
       appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            log('I am pressed${key.currentState}');
+            key.currentState?.openDrawer();
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SvgPicture.asset(
+              AppAssets.menu,
+            ),
+          ),
+        ),
         title: Row(
           children: [
             SizedBox(
@@ -51,10 +74,10 @@ class HomeDesktopView extends StatelessWidget {
       body: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Expanded(
-            flex: 3,
-            child: Menu(onNewLabel: onNewLabel),
-          ),
+          // Expanded(
+          //   flex: 3,
+          //   child: Menu(onNewLabel: widget.onNewLabel),
+          // ),
           Expanded(
             flex: 3,
             child: Container(
@@ -64,8 +87,8 @@ class HomeDesktopView extends StatelessWidget {
               )),
               child: NotesList(
                 isPhone: false,
-                getNotes: getNotes,
-                getLabels: getLabels,
+                getNotes: widget.getNotes,
+                getLabels: widget.getLabels,
               ),
             ),
           ),
@@ -76,5 +99,6 @@ class HomeDesktopView extends StatelessWidget {
         ],
       ),
     );
+    ;
   }
 }

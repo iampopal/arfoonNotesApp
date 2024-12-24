@@ -1,9 +1,10 @@
 // ignore_for_file: file_names
 
+import 'package:arfoon_note/client/models/label.dart';
 import 'package:flutter/material.dart';
 
 class FiltersWidget extends StatelessWidget {
-  final Map<String, dynamic> title;
+  final Label title;
   const FiltersWidget({
     super.key,
     required this.title,
@@ -17,7 +18,7 @@ class FiltersWidget extends StatelessWidget {
       margin: const EdgeInsets.only(left: 10),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       decoration: BoxDecoration(
-        color: title['title'] == 'All Notes' ? Colors.black : Colors.white,
+        color: title.name == 'All Notes' ? Colors.black : Colors.white,
         borderRadius: BorderRadius.circular(150),
         border: Border.all(
           width: 0.5,
@@ -25,11 +26,11 @@ class FiltersWidget extends StatelessWidget {
         ),
       ),
       child: Text(
-        title['title'] ?? "null",
+        title.name,
         style: TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 12,
-          color: title['title'] == 'All Notes' ? Colors.white : Colors.black,
+          color: title.name == 'All Notes' ? Colors.white : Colors.black,
         ),
       ),
     );

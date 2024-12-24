@@ -1,7 +1,9 @@
 import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
+import 'package:arfoon_note/frontend/frontend.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
 
 class OpenSettingsDialog extends StatefulWidget {
@@ -75,6 +77,14 @@ class _OpenSettingsDialogState extends State<OpenSettingsDialog> {
                 iconSize: 20,
                 onChanged: (value) {
                   languageValue = value;
+                  if (languageValue == 'Pashto') {
+                    Locales.change(context, 'ps');
+                    setState(() {});
+                  } else if (languageValue == 'Dari') {
+                    Locales.change(context, 'fa');
+                  } else {
+                    Locales.change(context, 'en');
+                  }
                 },
                 onSaved: (newValue) {
                   languageValue = newValue;

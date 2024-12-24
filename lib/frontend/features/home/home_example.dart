@@ -15,7 +15,19 @@ class _HomeExampleState extends State<HomeExample> {
   @override
   Widget build(BuildContext context) {
     return HomeView(
-      getNotes: (filter) async {
+      getLabels: (filter) async {
+        await Future.delayed(const Duration(milliseconds: 2));
+        // if ((filter.search ?? '').isNotEmpty) {
+        //   var list = FakeData()
+        //       .labels
+        //       .where((e) =>
+        //           e.name.toLowerCase().contains(filter.search!.toLowerCase()))
+        //       .toList();
+        //   return list;
+        // }
+        return FakeData().labels;
+      },
+      getNotes: (filter, isSearchedByLabel) async {
         await Future.delayed(const Duration(seconds: 2));
         if (notes == 0) {
           notes++;
@@ -25,7 +37,15 @@ class _HomeExampleState extends State<HomeExample> {
           notes++;
           return [];
         }
-        if ((filter.search ?? '').isNotEmpty) {
+        if ((filter.search ?? '').isNotEmpty && !isSearchedByLabel) {
+          var list = FakeData()
+              .notes
+              .where((e) =>
+                  e.title!.toLowerCase().contains(filter.search!.toLowerCase()))
+              .toList();
+          return list;
+        }
+        if ((filter.search ?? '').isNotEmpty && isSearchedByLabel) {
           var list = FakeData()
               .notes
               .where((e) => e.techs!.contains(filter.search))
