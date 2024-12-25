@@ -1,4 +1,25 @@
 {
-    "Arfoon Notes" : "َعرفون نوټس",
-    "Abdul Rahman Popal" : "عبدالرحمن پوپل"
+    "arfoon_notes" : "َعرفون نوټس",
+    "abdul_rahman_popal" : "عبدالرحمن پوپل",
+    "my_notes" : "نوتهای من",
+    "search_notes" : "جستجوی نوت",
+    "no_notes_found" : "نوت یافته نشد",
+    "retry" : "باز کوشش",
+    "think_note_achieve" : "فکر، نوت، بدست بیار",
+    "labels" : "لیبل هال",
+    "add_label" : "اضافه لیبل",
+    "settings" : "تنظیمات",
+    "good_morning" : "صبح بخیر",
+    "all_notes" : "نوتهای کلی",
+    "examples" : "مثالها",
+    "homeexample" : "مثال خانه",
+    "profileview" : "پروفایل",
+    "settingsview" : "تنظیمات",
+    "addeditlabelview" : "اضافه و تغیر دادن لیبل",
+    "sureview" : "شور ویو",
+    "change_theme" : "تغیر تیم",
+    "arfoon_notes_settings" : "تنظیمات عرفون نوتس",
+    "change_language" : "تغیر زبان",
+    "untitled" : "بدون عنوان",
+    "description" : "توضیحات"
 }

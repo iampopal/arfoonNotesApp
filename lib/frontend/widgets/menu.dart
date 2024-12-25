@@ -12,6 +12,7 @@ import 'package:arfoon_note/frontend/utils/open_settings_dialog.dart';
 import 'package:arfoon_note/integration/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Menu extends StatefulWidget {
@@ -35,7 +36,7 @@ class _MenuState extends State<Menu> {
           child: ListView(
             shrinkWrap: true,
             children: [
-               Row(
+              Row(
                 children: [
                   GestureDetector(
                     onTap: () {
@@ -48,20 +49,20 @@ class _MenuState extends State<Menu> {
                     ),
                   ),
                   const VerticalSpacer(space: 5),
-                  const Column(
+                  Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Arfoon Note',
-                        style: TextStyle(
+                        Locales.string(context, "arfoon_notes"),
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
                       ),
                       Text(
-                        'Think, Note, Achieve.',
-                        style: TextStyle(
+                        Locales.string(context, "think_note_achieve"),
+                        style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
                           color: Colors.black26,
@@ -90,7 +91,7 @@ class _MenuState extends State<Menu> {
                   ),
                   style: ListTileStyle.list,
                   tileColor: Colors.white,
-                  title: const Text('All Notes'),
+                  title: Text(Locales.string(context, 'all_notes')),
                   leading: SvgPicture.asset(
                     AppAssets.allNotes,
                     height: 22,
@@ -103,7 +104,7 @@ class _MenuState extends State<Menu> {
                 ),
               ),
               const VerticalSpacer(space: 20),
-              const Text('Labels'),
+              Text(Locales.string(context, "labels")),
               const VerticalSpacer(space: 10),
               Column(
                 children: [
@@ -148,7 +149,7 @@ class _MenuState extends State<Menu> {
                   ),
                   style: ListTileStyle.list,
                   tileColor: Colors.white,
-                  title: const Text('Add Label'),
+                  title: Text(Locales.string(context, "add_label")),
                   leading: SvgPicture.asset(
                     AppAssets.addLabel,
                     height: 22,
@@ -177,7 +178,7 @@ class _MenuState extends State<Menu> {
                 ),
                 style: ListTileStyle.list,
                 tileColor: Colors.white,
-                title: const Text('settings'),
+                title: Text(Locales.string(context, 'settings')),
                 leading: SvgPicture.asset(
                   AppAssets.settings,
                   height: 22,
@@ -185,7 +186,10 @@ class _MenuState extends State<Menu> {
                   color: Colors.black,
                 ),
                 onTap: () {
-                  const OpenSettingsDialog().show(context: context);
+                  OpenSettingsDialog(
+                    languageCode:
+                        Locales.currentLocale(context)?.languageCode ?? "en",
+                  ).show(context: context);
                 },
               ),
               const VerticalSpacer(space: 10),
@@ -202,20 +206,20 @@ class _MenuState extends State<Menu> {
                       width: 33,
                     ),
                     const HorizontalSpacer(space: 10),
-                    const Column(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Abdul Rahman Popal',
-                          style: TextStyle(
+                          Locales.string(context, "abdul_rahman_popal"),
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 13,
                           ),
                         ),
                         Text(
-                          'Good Morning',
-                          style: TextStyle(
+                          Locales.string(context, "good_morning"),
+                          style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
                             color: Colors.black26,

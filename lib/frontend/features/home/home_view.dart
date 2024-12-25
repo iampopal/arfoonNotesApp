@@ -138,7 +138,7 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
         centerTitle: true,
-        title: Text(Locales.string(context, "Arfoon Notes")),
+        title: Text(Locales.string(context, "arfoon_notes")),
         titleTextStyle: const TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.bold,

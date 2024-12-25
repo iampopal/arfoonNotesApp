@@ -7,7 +7,11 @@ import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
 
 class OpenSettingsDialog extends StatefulWidget {
-  const OpenSettingsDialog({super.key});
+  String? languageCode;
+  OpenSettingsDialog({
+    super.key,
+    required this.languageCode,
+  });
 
   Future show({required BuildContext context}) {
     return showDialog(
@@ -23,7 +27,14 @@ class OpenSettingsDialog extends StatefulWidget {
 class _OpenSettingsDialogState extends State<OpenSettingsDialog> {
   @override
   Widget build(BuildContext context) {
-    String? languageValue = 'English';
+    // String? languageValue;
+    // if (widget.languageCode == 'en') {
+    //   languageValue = Utils().languageDropDownItems[0].value;
+    // } else if (widget.languageCode == 'ps') {
+    //   languageValue = Utils().languageDropDownItems[1].value;
+    // } else {
+    //   languageValue = Utils().languageDropDownItems[2].value;
+    // }
     String? themeValue = 'System Theme';
     return SimpleDialog(
         title: Column(
@@ -35,10 +46,10 @@ class _OpenSettingsDialogState extends State<OpenSettingsDialog> {
               height: 60,
               width: 60,
             ),
-            const Text(
-              'Arfoon Notes Settings',
+            Text(
+              Locales.string(context, 'arfoon_notes_settings'),
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
               ),
@@ -54,7 +65,7 @@ class _OpenSettingsDialogState extends State<OpenSettingsDialog> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Text('Change Language'),
+              Text(Locales.string(context, 'change_language')),
               const VerticalSpacer(space: 10),
               DropdownButtonFormField<String>(
                 items: Utils().languageDropDownItems,
@@ -76,23 +87,23 @@ class _OpenSettingsDialogState extends State<OpenSettingsDialog> {
                 ),
                 iconSize: 20,
                 onChanged: (value) {
-                  languageValue = value;
-                  if (languageValue == 'Pashto') {
+                  widget.languageCode = value;
+                  if (widget.languageCode == 'ps') {
                     Locales.change(context, 'ps');
                     setState(() {});
-                  } else if (languageValue == 'Dari') {
+                  } else if (widget.languageCode == 'fa') {
                     Locales.change(context, 'fa');
                   } else {
                     Locales.change(context, 'en');
                   }
                 },
                 onSaved: (newValue) {
-                  languageValue = newValue;
+                  widget.languageCode = newValue;
                 },
-                value: languageValue,
+                value: widget.languageCode,
               ),
               const VerticalSpacer(space: 10),
-              const Text('Change Theme'),
+              Text(Locales.string(context, 'change_theme')),
               const VerticalSpacer(space: 10),
               DropdownButtonFormField<String>(
                 items: Utils().themeDropDownItems,

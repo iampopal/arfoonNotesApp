@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class Utils {
   List<DropdownMenuItem<String>> get languageDropDownItems {
     List<DropdownMenuItem<String>> menuItems = const [
-      DropdownMenuItem(value: "English", child: Text("Englis")),
-      DropdownMenuItem(value: "Pashto", child: Text("Pashto")),
-      DropdownMenuItem(value: "Dari", child: Text("Dari")),
+      DropdownMenuItem(value: "en", child: Text("Englis")),
+      DropdownMenuItem(value: "ps", child: Text("پښتو")),
+      DropdownMenuItem(value: "fa", child: Text("دری")),
     ];
     return menuItems;
   }

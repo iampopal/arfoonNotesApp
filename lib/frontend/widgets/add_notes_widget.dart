@@ -3,6 +3,7 @@
 import 'package:arfoon_note/frontend/components/HorizontalSpacer.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AddNoteScreen extends StatefulWidget {
@@ -111,8 +112,8 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                   : const SizedBox(),
               TextField(
                 autofocus: true,
-                decoration: const InputDecoration(
-                  hintText: 'Untitled',
+                decoration: InputDecoration(
+                  hintText: Locales.string(context, "untitled"),
                   border: InputBorder.none,
                 ),
                 style: TextStyle(
@@ -122,7 +123,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 ),
               ),
               Text(
-                'Description',
+                Locales.string(context, 'description'),
                 style: TextStyle(
                   color: Colors.grey[500],
                   fontSize: 15,

@@ -9,6 +9,7 @@ import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/widgets/filters_widget.dart';
 import 'package:arfoon_note/frontend/widgets/notes_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
 
 class NotesList extends StatefulWidget {
@@ -141,7 +142,7 @@ class _NotesListState extends State<NotesList> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('My Notes'),
+                      Text(Locales.string(context, "arfoon_notes")),
                       ElevatedButton(
                         onPressed: () {},
                         style: ButtonStyle(
@@ -181,7 +182,7 @@ class _NotesListState extends State<NotesList> {
                     AppAssets.search,
                   ),
                 ),
-                hintText: 'Search Notes',
+                hintText: Locales.string(context, "search_notes"),
               ),
             ),
           ),
@@ -232,7 +233,7 @@ class _NotesListState extends State<NotesList> {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('No Notes Found'),
+          Text(Locales.string(context, "no_notes_found")),
           _buildRetry(),
         ],
       ));
@@ -270,7 +271,7 @@ class _NotesListState extends State<NotesList> {
       onPressed: () {
         _getNotes();
       },
-      child: const Text('Retry'),
+      child: Text(Locales.string(context, "retry")),
     );
   }
 }

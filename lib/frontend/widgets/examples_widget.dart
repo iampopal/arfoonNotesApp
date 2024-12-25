@@ -3,6 +3,7 @@
 import 'package:arfoon_note/client/models/examples_data.dart';
 import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 
 class ExampleWidget extends StatefulWidget {
   const ExampleWidget({
@@ -39,7 +40,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
         children: [
           const VerticalSpacer(space: 5),
           Text(
-            widget.data.title ?? "",
+            Locales.string(context, widget.data.title ?? ""),
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,

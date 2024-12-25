@@ -4,6 +4,7 @@ import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
 
 class NotesWidget extends StatelessWidget {
@@ -80,7 +81,7 @@ class NotesWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: 38,
+          right: context.currentLocale?.languageCode == 'en' ? 38 : 340,
           top: 25,
           child: GestureDetector(
             onTap: () {
