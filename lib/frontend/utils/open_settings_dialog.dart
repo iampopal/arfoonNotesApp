@@ -1,10 +1,15 @@
+import 'dart:developer';
+
+import 'package:arfoon_note/frontend/colors/app_colors.dart';
 import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
 import 'package:arfoon_note/frontend/frontend.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/utils/utils.dart';
+import 'package:arfoon_note/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class OpenSettingsDialog extends StatefulWidget {
   String? languageCode;
@@ -36,6 +41,7 @@ class _OpenSettingsDialogState extends State<OpenSettingsDialog> {
     //   languageValue = Utils().languageDropDownItems[2].value;
     // }
     String? themeValue = 'System Theme';
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return SimpleDialog(
         title: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -126,6 +132,11 @@ class _OpenSettingsDialogState extends State<OpenSettingsDialog> {
                 iconSize: 20,
                 onChanged: (value) {
                   themeValue = value;
+                  if (themeValue == 'Light') {
+                    themeProvider.toggleTheme(ThemeData.light());
+                  } else {
+                    themeProvider.toggleTheme(ThemeData.dark());
+                  }
                 },
                 onSaved: (newValue) {
                   themeValue = newValue;

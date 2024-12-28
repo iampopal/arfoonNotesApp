@@ -43,6 +43,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   shimmer: ^2.0.0
   flutter_locales: ^3.0.4
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
