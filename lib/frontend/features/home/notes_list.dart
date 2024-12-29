@@ -285,6 +285,12 @@ class _NotesListState extends State<NotesList> {
       onPressed: () {
         _getNotes();
       },
+      style: ButtonStyle(
+        foregroundColor:
+            WidgetStateProperty.all(Theme.of(context).colorScheme.primary),
+        backgroundColor:
+            WidgetStateProperty.all(Theme.of(context).colorScheme.secondary),
+      ),
       child: Text(Locales.string(context, "retry")),
     );
   }
