@@ -8,9 +8,11 @@ import 'package:arfoon_note/frontend/components/shimmers/home_example_shimmers.d
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/widgets/filters_widget.dart';
 import 'package:arfoon_note/frontend/widgets/notes_widget.dart';
+import 'package:arfoon_note/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class NotesList extends StatefulWidget {
   final bool isPhone;
@@ -146,10 +148,10 @@ class _NotesListState extends State<NotesList> {
                       ElevatedButton(
                         onPressed: () {},
                         style: ButtonStyle(
-                          backgroundColor:
-                              WidgetStateProperty.all(Colors.black),
-                          foregroundColor:
-                              WidgetStateProperty.all(Colors.white),
+                          backgroundColor: WidgetStateProperty.all(
+                              Theme.of(context).colorScheme.secondary),
+                          foregroundColor: WidgetStateProperty.all(
+                              Theme.of(context).colorScheme.primary),
                           shape:
                               WidgetStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
@@ -178,9 +180,18 @@ class _NotesListState extends State<NotesList> {
                 ),
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: SvgPicture.asset(
-                    AppAssets.search,
-                  ),
+                  child: Consumer<ThemeProvider>(
+                      builder: (context, themeProvider, child) {
+                    return SvgPicture.asset(
+                      AppAssets.search,
+                      colorFilter: ColorFilter.mode(
+                        themeProvider.currentTheme == AppTheme.dark
+                            ? Colors.white
+                            : Colors.black,
+                        BlendMode.srcIn,
+                      ),
+                    );
+                  }),
                 ),
                 hintText: Locales.string(context, "search_notes"),
               ),
@@ -221,7 +232,10 @@ class _NotesListState extends State<NotesList> {
     if (error != null) {
       return Center(
           child: Column(
-        children: [Text('ERROR\n$error'), _buildRetry()],
+        children: [
+          Text('ERROR\n$error'),
+          _buildRetry(),
+        ],
       ));
     }
     if (loading) {

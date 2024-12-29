@@ -2,9 +2,11 @@
 
 import 'package:arfoon_note/frontend/components/HorizontalSpacer.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
+import 'package:arfoon_note/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class AddNoteScreen extends StatefulWidget {
   final bool isPhone;
@@ -19,6 +21,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         centerTitle: false,
         titleSpacing: 0,
         title: Row(
@@ -49,11 +52,33 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: const Icon(Icons.arrow_back_ios_outlined),
+                child: Consumer<ThemeProvider>(
+                    builder: (context, themeProvider, child) {
+                  return Icon(
+                    Icons.arrow_back_ios_outlined,
+                    color: themeProvider.currentTheme == AppTheme.dark
+                        ? Colors.white
+                        : Colors.black,
+                  );
+                }),
               )
             : const Visibility(visible: false, child: SizedBox()),
         actions: widget.isPhone
-            ? [SvgPicture.asset(AppAssets.more)]
+            ? [
+                Consumer<ThemeProvider>(
+                  builder: (context, themeProvider, child) {
+                    return SvgPicture.asset(
+                      AppAssets.more,
+                      colorFilter: ColorFilter.mode(
+                        themeProvider.currentTheme == AppTheme.dark
+                            ? Colors.white
+                            : Colors.black,
+                        BlendMode.srcIn,
+                      ),
+                    );
+                  },
+                )
+              ]
             : [
                 Text(
                   'Updated on Dec 17',
@@ -75,9 +100,18 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                   ),
                   child: Row(
                     children: [
-                      SvgPicture.asset(
-                        AppAssets.saveChanges,
-                        color: Colors.black,
+                      Consumer<ThemeProvider>(
+                        builder: (context, themeProvider, child) {
+                          return SvgPicture.asset(
+                            AppAssets.saveChanges,
+                            colorFilter: ColorFilter.mode(
+                              themeProvider.currentTheme == AppTheme.dark
+                                  ? Colors.white
+                                  : Colors.black,
+                              BlendMode.srcIn,
+                            ),
+                          );
+                        },
                       ),
                       const HorizontalSpacer(space: 10),
                       const Text(
@@ -112,6 +146,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                   : const SizedBox(),
               TextField(
                 autofocus: true,
+                cursorColor: Theme.of(context).colorScheme.secondary,
                 decoration: InputDecoration(
                   hintText: Locales.string(context, "untitled"),
                   border: InputBorder.none,
@@ -119,13 +154,13 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 25,
-                  color: Colors.grey[100],
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
               Text(
                 Locales.string(context, 'description'),
                 style: TextStyle(
-                  color: Colors.grey[500],
+                  color: Theme.of(context).colorScheme.secondary,
                   fontSize: 15,
                 ),
               ),

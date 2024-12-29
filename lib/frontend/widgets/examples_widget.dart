@@ -43,7 +43,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
             Locales.string(context, widget.data.title ?? ""),
             style: const TextStyle(
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              // color: Colors.black,
               fontSize: 25,
             ),
           ),
@@ -52,7 +52,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
             widget.data.subTitle ?? '',
             style: const TextStyle(
               fontWeight: FontWeight.w400,
-              color: Colors.black,
+              // color: Colors.black,
               fontSize: 15,
             ),
           ),

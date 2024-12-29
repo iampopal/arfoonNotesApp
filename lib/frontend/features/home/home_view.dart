@@ -7,9 +7,11 @@ import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/utils/add_edit_label_dialog.dart';
 import 'package:arfoon_note/frontend/widgets/add_notes_widget.dart';
 import 'package:arfoon_note/frontend/widgets/menu.dart';
+import 'package:arfoon_note/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 extension ContextExt on BuildContext {
   bool get isDesktop => MediaQuery.of(this).size.width > 1100;
@@ -132,15 +134,24 @@ class _HomeViewState extends State<HomeView> {
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: SvgPicture.asset(
-              AppAssets.menu,
-            ),
+            child: Consumer<ThemeProvider>(
+                builder: (context, themeProvider, child) {
+              return SvgPicture.asset(
+                AppAssets.menu,
+                colorFilter: ColorFilter.mode(
+                  themeProvider.currentTheme == AppTheme.dark
+                      ? Colors.white
+                      : Colors.black,
+                  BlendMode.srcIn,
+                ),
+              );
+            }),
           ),
         ),
         centerTitle: true,
         title: Text(Locales.string(context, "arfoon_notes")),
-        titleTextStyle: const TextStyle(
-          color: Colors.black,
+        titleTextStyle: TextStyle(
+          color: Theme.of(context).colorScheme.secondary,
           fontWeight: FontWeight.bold,
           fontSize: 30,
         ),

@@ -1,3 +1,5 @@
+import 'package:arfoon_note/theme/dark_theme.dart';
+import 'package:arfoon_note/theme/light_theme.dart';
 import 'package:arfoon_note/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
@@ -22,34 +24,15 @@ class FrontendApp extends StatelessWidget {
             title: 'Arfoon Note',
             // theme: provider.theme,
             theme: ThemeData(
-                useMaterial3: false,
-                colorScheme: const ColorScheme(
-                  brightness: Brightness.light,
-                  primaryContainer: Color.fromARGB(255, 236, 234, 234),
-                  primary: Color.fromARGB(255, 255, 255, 255),
-                  onPrimary: Color.fromARGB(255, 0, 0, 0),
-                  secondary: Colors.orangeAccent,
-                  onSecondary: Colors.orange,
-                  error: Colors.black,
-                  onError: Colors.red,
-                  surface: Color.fromARGB(255, 246, 246, 247),
-                  onSurface: Colors.blueGrey,
-                )), //provider.lightColor),
+              useMaterial3: false,
+              primaryColor: Colors.white,
+              colorScheme: lightColorScheme,
+            ), //provider.lightColor),
             darkTheme: ThemeData(
-                useMaterial3: false,
-                colorScheme: const ColorScheme(
-                  brightness: Brightness.dark,
-                  primary: Color.fromARGB(255, 253, 195, 2),
-                  onPrimary: Color(0xFF5C113B),
-                  primaryContainer: Color(0xFF792952),
-                  onPrimaryContainer: Color(0xFFFFD8E6),
-                  secondary: Color(0xFFE1BDCA),
-                  onSecondary: Color(0xFF412A33),
-                  error: Colors.yellow,
-                  onError: Colors.orange,
-                  surface: Colors.black,
-                  onSurface: Colors.black87,
-                )),
+              useMaterial3: false,
+              primaryColor: Colors.black,
+              colorScheme: darkColorScheme,
+            ),
             themeMode: provider.themeMode,
             // ThemeData(
             //   colorScheme: ColorScheme.fromSeed(

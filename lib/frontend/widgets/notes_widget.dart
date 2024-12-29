@@ -21,7 +21,9 @@ class NotesWidget extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: note.pinned ?? false ? Colors.blue : Colors.grey[200],
+            color: note.pinned ?? false
+                ? Colors.blue
+                : Theme.of(context).colorScheme.secondaryContainer,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Column(
@@ -31,7 +33,9 @@ class NotesWidget extends StatelessWidget {
               Text(
                 note.date ?? '',
                 style: TextStyle(
-                  color: note.pinned ?? false ? Colors.white : Colors.black,
+                  color: note.pinned ?? false
+                      ? Colors.white
+                      : Theme.of(context).colorScheme.secondary,
                 ),
               ),
               const VerticalSpacer(space: 6),
@@ -39,7 +43,9 @@ class NotesWidget extends StatelessWidget {
                 note.title ?? '',
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
-                  color: note.pinned ?? false ? Colors.white : Colors.black,
+                  color: note.pinned ?? false
+                      ? Colors.white
+                      : Theme.of(context).colorScheme.secondary,
                   fontSize: 23,
                 ),
               ),
@@ -47,7 +53,9 @@ class NotesWidget extends StatelessWidget {
               Text(
                 note.details ?? '',
                 style: TextStyle(
-                  color: note.pinned ?? false ? Colors.white : Colors.black,
+                  color: note.pinned ?? false
+                      ? Colors.white
+                      : Theme.of(context).colorScheme.secondary,
                   fontSize: 13,
                 ),
               ),
