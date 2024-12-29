@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:arfoon_note/theme/dark_theme.dart';
 import 'package:arfoon_note/theme/light_theme.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ enum AppTheme { light, dark }
 
 class ThemeProvider with ChangeNotifier {
   final ThemeData _theme = ThemeData.light();
+  String currentSelectedLabel = 'All Notes';
 
   ThemeData get theme => _theme;
 
@@ -26,6 +29,12 @@ class ThemeProvider with ChangeNotifier {
     } else {
       themeMode = ThemeMode.system;
     }
+    notifyListeners();
+  }
+
+  void selectCurrentLabel(currentLabel) {
+    log('selected Label = $currentLabel');
+    currentSelectedLabel = currentLabel;
     notifyListeners();
   }
 }

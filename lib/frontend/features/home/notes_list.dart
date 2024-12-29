@@ -205,18 +205,26 @@ class _NotesListState extends State<NotesList> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: labels
                   .asMap()
-                  .map((i, element) => MapEntry(
+                  .map(
+                    (i, element) => MapEntry(
                       i,
-                      GestureDetector(
-                        onTap: () {
-                          _getNotes(
-                              search: element.name, isSearchByLabel: true);
-                          setState(() {});
+                      Consumer<ThemeProvider>(
+                        builder: (context, themeprovider, child) {
+                          return GestureDetector(
+                            onTap: () {
+                              themeprovider.selectCurrentLabel(element.name);
+                              _getNotes(
+                                  search: element.name, isSearchByLabel: true);
+                              setState(() {});
+                            },
+                            child: FiltersWidget(
+                              title: element,
+                            ),
+                          );
                         },
-                        child: FiltersWidget(
-                          title: element,
-                        ),
-                      )))
+                      ),
+                    ),
+                  )
                   .values
                   .toList(),
             ),
@@ -291,7 +299,7 @@ class _NotesListState extends State<NotesList> {
         backgroundColor:
             WidgetStateProperty.all(Theme.of(context).colorScheme.secondary),
       ),
-      child: Text(Locales.string(context, "retry")),
+      child: Text(Locales.string(context, "Retry")),
     );
   }
 }
