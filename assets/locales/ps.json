@@ -1,4 +1,25 @@
 {
-    "Arfoon Notes" : "َعرفون نوټس",
-    "Abdul Rahman Popal" : "عبدالرحمن پوپل"
+    "arfoon_notes" : "َعرفون نوټس",
+    "abdul_rahman_popal" : "عبدالرحمن پوپل",
+    "my_notes" : "زمانوټونه",
+    "search_notes" : "نوټونه وپلټۍ",
+    "no_notes_found" : "نوټونه پیدا نه شو",
+    "retry" : "بیا کوشش",
+    "think_note_achieve" : "سوچ، نوټ، ترلاسه کړۍ",
+    "labels" : "لیبلونه",
+    "add_label" : "لیبل اضافه کول",
+    "settings" : "تنظیمات",
+    "good_morning" : "سهار په خیر",
+    "all_notes" : "ټول نوټونه",
+    "examples" : "مثالونه",
+    "homeexample" : "مثال خانه",
+    "profileview" : "پروفایل",
+    "settingsview" : "تنظیمات",
+    "addeditlabelview" : "اضافه و تغیر دادن لیبل",
+    "sureview" : "شور ویو",
+    "change_theme" : "تغیر تیم",
+    "arfoon_notes_settings" : "عرفون نوټس تنظیمات",
+    "change_language" : "د ژبې تغیر",
+    "untitled" : "بې عنوان",
+    "description" : "تفصیل"
 }

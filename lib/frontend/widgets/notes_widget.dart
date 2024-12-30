@@ -4,6 +4,7 @@ import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
 
 class NotesWidget extends StatelessWidget {
@@ -20,7 +21,9 @@ class NotesWidget extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: note.pinned ?? false ? Colors.blue : Colors.grey[200],
+            color: note.pinned ?? false
+                ? Colors.blue
+                : Theme.of(context).colorScheme.secondaryContainer,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Column(
@@ -30,7 +33,9 @@ class NotesWidget extends StatelessWidget {
               Text(
                 note.date ?? '',
                 style: TextStyle(
-                  color: note.pinned ?? false ? Colors.white : Colors.black,
+                  color: note.pinned ?? false
+                      ? Colors.white
+                      : Theme.of(context).colorScheme.secondary,
                 ),
               ),
               const VerticalSpacer(space: 6),
@@ -38,7 +43,9 @@ class NotesWidget extends StatelessWidget {
                 note.title ?? '',
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
-                  color: note.pinned ?? false ? Colors.white : Colors.black,
+                  color: note.pinned ?? false
+                      ? Colors.white
+                      : Theme.of(context).colorScheme.secondary,
                   fontSize: 23,
                 ),
               ),
@@ -46,7 +53,9 @@ class NotesWidget extends StatelessWidget {
               Text(
                 note.details ?? '',
                 style: TextStyle(
-                  color: note.pinned ?? false ? Colors.white : Colors.black,
+                  color: note.pinned ?? false
+                      ? Colors.white
+                      : Theme.of(context).colorScheme.secondary,
                   fontSize: 13,
                 ),
               ),
@@ -80,7 +89,7 @@ class NotesWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: 38,
+          right: context.currentLocale?.languageCode == 'en' ? 38 : 340,
           top: 25,
           child: GestureDetector(
             onTap: () {

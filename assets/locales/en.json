@@ -1,4 +1,25 @@
 {
-    "Arfoon Notes" : "Arfoon Notes",
-    "Abdul Rahman Popal" : "Abdul Rahman Popal"
+    "arfoon_notes" : "Arfoon Notes",
+    "abdul_rahman_popal" : "Abdul Rahman Popal",
+    "my_notes" : "My Notes",
+    "search_notes" : "Search Notes",
+    "no_notes_found" : "No Notes Found",
+    "retry" : "Retry",
+    "think_note_achieve" : "Think Note Achieve.",
+    "labels" : "Labels",
+    "add_label" : "Add Label",
+    "settings" : "Settings",
+    "good_morning" : "Good Morning",
+    "all_notes" : "All Notes",
+    "examples" : "Examples",
+    "homeexample" : "HomeExample",
+    "profileview" : "ProfileView",
+    "settingsview" : "SettingsView",
+    "addeditlabelview" : "AddEditLabelView",
+    "sureview" : "SureView",
+    "change_theme" : "Change Theme",
+    "arfoon_notes_settings" : "Arfoon Notes Settings",
+    "change_language" : "Change Language",
+    "untitled" : "Untitled",
+    "description" : "Description"
 }

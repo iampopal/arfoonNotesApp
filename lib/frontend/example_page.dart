@@ -5,8 +5,10 @@ import 'package:arfoon_note/frontend/utils/add_edit_label_dialog.dart';
 import 'package:arfoon_note/frontend/utils/add_profile_label_dialog.dart';
 import 'package:arfoon_note/frontend/utils/open_settings_dialog.dart';
 import 'package:arfoon_note/frontend/widgets/examples_widget.dart';
+import 'package:arfoon_note/theme/theme_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 
 class ExamplePage extends StatefulWidget {
   const ExamplePage({super.key});
@@ -21,12 +23,12 @@ class _MyHomePageState extends State<ExamplePage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        titleTextStyle: const TextStyle(
-          color: Colors.black,
+        titleTextStyle: TextStyle(
+          color: Theme.of(context).colorScheme.secondary,
           fontSize: 30,
           fontWeight: FontWeight.bold,
         ),
-        title: const Text('Examples'),
+        title: Text(Locales.string(context, 'examples')),
         elevation: 0,
       ),
       body: ListView(
@@ -67,7 +69,13 @@ class _MyHomePageState extends State<ExamplePage> {
           InkWell(
             splashColor: Colors.black12,
             onTap: () {
-              const OpenSettingsDialog().show(context: context);
+              OpenSettingsDialog(
+                themeMode: ThemeProvider().currentTheme == AppTheme.dark
+                    ? 'Dark'
+                    : 'Light',
+                languageCode:
+                    Locales.currentLocale(context)?.languageCode ?? "en",
+              ).show(context: context);
             },
             child: ExampleWidget(
               data: FakeData().examplesData[2],

@@ -2,12 +2,21 @@ import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
 import 'package:arfoon_note/frontend/frontend.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/utils/utils.dart';
+import 'package:arfoon_note/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class OpenSettingsDialog extends StatefulWidget {
-  const OpenSettingsDialog({super.key});
+  String? languageCode;
+  String? themeMode;
+  OpenSettingsDialog({
+    super.key,
+    required this.languageCode,
+    required this.themeMode,
+  });
 
   Future show({required BuildContext context}) {
     return showDialog(
@@ -23,8 +32,8 @@ class OpenSettingsDialog extends StatefulWidget {
 class _OpenSettingsDialogState extends State<OpenSettingsDialog> {
   @override
   Widget build(BuildContext context) {
-    String? languageValue = 'English';
-    String? themeValue = 'System Theme';
+    // String? themeValue = 'System Theme';
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return SimpleDialog(
         title: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -34,11 +43,17 @@ class _OpenSettingsDialogState extends State<OpenSettingsDialog> {
               AppAssets.settings,
               height: 60,
               width: 60,
+              colorFilter: ColorFilter.mode(
+                themeProvider.currentTheme == AppTheme.dark
+                    ? Colors.white
+                    : Colors.black,
+                BlendMode.srcIn,
+              ),
             ),
-            const Text(
-              'Arfoon Notes Settings',
+            Text(
+              Locales.string(context, 'arfoon_notes_settings'),
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
               ),
@@ -54,13 +69,13 @@ class _OpenSettingsDialogState extends State<OpenSettingsDialog> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Text('Change Language'),
+              Text(Locales.string(context, 'change_language')),
               const VerticalSpacer(space: 10),
               DropdownButtonFormField<String>(
                 items: Utils().languageDropDownItems,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 15,
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.secondary,
                   fontFamily: 'Rubik',
                 ),
                 elevation: 24,
@@ -76,30 +91,29 @@ class _OpenSettingsDialogState extends State<OpenSettingsDialog> {
                 ),
                 iconSize: 20,
                 onChanged: (value) {
-                  languageValue = value;
-                  if (languageValue == 'Pashto') {
+                  widget.languageCode = value;
+                  if (widget.languageCode == 'ps') {
                     Locales.change(context, 'ps');
                     setState(() {});
-                  } else if (languageValue == 'Dari') {
+                  } else if (widget.languageCode == 'fa') {
                     Locales.change(context, 'fa');
                   } else {
                     Locales.change(context, 'en');
                   }
                 },
                 onSaved: (newValue) {
-                  languageValue = newValue;
+                  widget.languageCode = newValue;
                 },
-                value: languageValue,
+                value: widget.languageCode,
               ),
               const VerticalSpacer(space: 10),
-              const Text('Change Theme'),
+              Text(Locales.string(context, 'change_theme')),
               const VerticalSpacer(space: 10),
               DropdownButtonFormField<String>(
                 items: Utils().themeDropDownItems,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 15,
-                  color: Colors.black,
-                  fontFamily: 'Rubik',
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
                 elevation: 24,
                 iconEnabledColor: Colors.black,
@@ -114,12 +128,17 @@ class _OpenSettingsDialogState extends State<OpenSettingsDialog> {
                 ),
                 iconSize: 20,
                 onChanged: (value) {
-                  themeValue = value;
+                  widget.themeMode = value;
+                  if (widget.themeMode == 'Light') {
+                    themeProvider.toggleTheme(ThemeData.light());
+                  } else {
+                    themeProvider.toggleTheme(ThemeData.dark());
+                  }
                 },
                 onSaved: (newValue) {
-                  themeValue = newValue;
+                  widget.themeMode = newValue;
                 },
-                value: themeValue,
+                value: widget.themeMode,
               ),
             ],
           ),
