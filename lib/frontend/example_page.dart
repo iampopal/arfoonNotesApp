@@ -1,3 +1,4 @@
+import 'package:arfoon_note/client/client.dart';
 import 'package:arfoon_note/frontend/data/data.dart';
 import 'package:arfoon_note/frontend/features/home/home_example.dart';
 import 'package:arfoon_note/frontend/utils/add_edit_label_dialog.dart';
@@ -77,6 +78,8 @@ class _MyHomePageState extends State<ExamplePage> {
             splashColor: Colors.black12,
             onTap: () {
               AddEditLabelDialog(
+                onDelete: (l) async {},
+                label: Label(name: 'Yess'),
                 onSubmit: (label) async {
                   await Future.delayed(const Duration(seconds: 1));
                   // Navigator.pop(context);

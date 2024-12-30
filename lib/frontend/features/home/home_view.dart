@@ -26,7 +26,7 @@ class HomeView extends StatefulWidget {
   final Future<Label?> Function()? onNewLabel;
   final Future<List<Note>> Function(Filter filter, bool isSearchedByLabel)
       getNotes;
-  final Future<List<Label>> Function(Filter filter) getLabels;
+  final Future<List<Label>> Function() getLabels;
 
   @override
   State<HomeView> createState() => _HomeViewState();

@@ -1,5 +1,5 @@
-import 'package:arfoon_note/theme/dark_theme.dart';
-import 'package:arfoon_note/theme/light_theme.dart';
+import 'package:arfoon_note/frontend/theme/dark_theme.dart';
+import 'package:arfoon_note/frontend/theme/light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 

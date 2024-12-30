@@ -21,7 +21,7 @@ class NotesList extends StatefulWidget {
   });
   final Future<List<Note>> Function(Filter filter, bool isSearchedByLabel)
       getNotes;
-  final Future<List<Label>> Function(Filter filter) getLabels;
+  final Future<List<Label>> Function() getLabels;
 
   @override
   State<NotesList> createState() => _NotesListState();
@@ -54,12 +54,7 @@ class _NotesListState extends State<NotesList> {
         error = null;
         loading = true;
       });
-      labels = await widget.getLabels(
-        Filter(
-          page: 0,
-          search: search,
-        ),
-      );
+      labels = await widget.getLabels();
       if (labels.isEmpty) {
         labels.insert(
           0,
