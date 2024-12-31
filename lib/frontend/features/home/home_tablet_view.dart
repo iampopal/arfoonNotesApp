@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:arfoon_note/client/models/filter.dart';
 import 'package:arfoon_note/client/models/label.dart';
 import 'package:arfoon_note/client/models/note.dart';
@@ -8,8 +6,11 @@ import 'package:arfoon_note/frontend/features/home/notes_list.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/widgets/add_notes_widget.dart';
 import 'package:arfoon_note/frontend/widgets/menu.dart';
+import 'package:arfoon_note/frontend/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class HomeTabletView extends StatefulWidget {
   const HomeTabletView({
@@ -33,34 +34,49 @@ class _HomeTabletViewState extends State<HomeTabletView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       key: key,
       drawer: const Menu(),
       appBar: AppBar(
+        elevation: 0,
         leading: InkWell(
           onTap: () {
-            log('I am pressed${key.currentState}');
             key.currentState?.openDrawer();
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: SvgPicture.asset(
               AppAssets.menu,
+              colorFilter: ColorFilter.mode(
+                Theme.of(context).colorScheme.secondary,
+                BlendMode.srcIn,
+              ),
             ),
           ),
         ),
         title: Row(
           children: [
-            SizedBox(
-              height: 30,
-              width: 30,
-              child: SvgPicture.asset(
-                AppAssets.logo,
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: SizedBox(
+                height: 30,
+                width: 30,
+                child: SvgPicture.asset(
+                  AppAssets.logo,
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.secondary,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
             ),
             const HorizontalSpacer(space: 5),
-            const Text(
-              'Arfoon Note',
+            Text(
+              Locales.string(context, 'arfoon_notes'),
               style: TextStyle(
+                color: Theme.of(context).colorScheme.secondary,
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
               ),
@@ -73,6 +89,7 @@ class _HomeTabletViewState extends State<HomeTabletView> {
       ),
       body: Row(
         mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Expanded(
           //   flex: 3,
@@ -94,7 +111,7 @@ class _HomeTabletViewState extends State<HomeTabletView> {
           ),
           const Expanded(
             flex: 6,
-            child: AddNoteScreen(isPhone: false),
+            child: AddNoteScreen(),
           )
         ],
       ),

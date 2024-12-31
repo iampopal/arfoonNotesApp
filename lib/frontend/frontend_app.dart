@@ -1,6 +1,7 @@
+import 'package:arfoon_note/frontend/providers/notes_provider.dart';
 import 'package:arfoon_note/theme/dark_theme.dart';
 import 'package:arfoon_note/theme/light_theme.dart';
-import 'package:arfoon_note/theme/theme_provider.dart';
+import 'package:arfoon_note/frontend/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:provider/provider.dart';
@@ -12,8 +13,11 @@ class FrontendApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LocaleBuilder(
-      builder: (locale) => ChangeNotifierProvider(
-        create: (context) => ThemeProvider(),
+      builder: (locale) => MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => ThemeProvider()),
+          ChangeNotifierProvider(create: (context) => NotesProvider())
+        ],
         builder: (context, child) {
           final provider = Provider.of<ThemeProvider>(context);
           return MaterialApp(

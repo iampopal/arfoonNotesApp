@@ -4,7 +4,7 @@ import 'package:arfoon_note/frontend/utils/add_edit_label_dialog.dart';
 import 'package:arfoon_note/frontend/utils/add_profile_label_dialog.dart';
 import 'package:arfoon_note/frontend/utils/open_settings_dialog.dart';
 import 'package:arfoon_note/frontend/widgets/examples_widget.dart';
-import 'package:arfoon_note/theme/theme_provider.dart';
+import 'package:arfoon_note/frontend/providers/theme_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';

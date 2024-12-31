@@ -1,11 +1,17 @@
 // ignore_for_file: file_names
+import 'dart:io';
+
 import 'package:arfoon_note/client/client.dart';
 import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
+import 'package:arfoon_note/frontend/features/features.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
+import 'package:arfoon_note/frontend/providers/notes_provider.dart';
+import 'package:arfoon_note/frontend/widgets/add_notes_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class NotesWidget extends StatelessWidget {
   final int currentIndex;
@@ -15,89 +21,99 @@ class NotesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    NotesProvider notesProvider = Provider.of<NotesProvider>(context);
     return Stack(
       children: [
-        Container(
-          padding: const EdgeInsets.all(12),
-          margin: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: note.pinned ?? false
-                ? Colors.blue
-                : Theme.of(context).colorScheme.secondaryContainer,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                note.date ?? '',
-                style: TextStyle(
-                  color: note.pinned ?? false
-                      ? Colors.white
-                      : Theme.of(context).colorScheme.secondary,
+        GestureDetector(
+          onTap: () {
+            if (!context.isDesktop && !context.isTablet) {
+              notesProvider.selectNote(note.title ?? '', note.details ?? '');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AddNoteScreen(),
+                  ));
+            } else {
+              notesProvider.selectNote(note.title ?? '', note.details ?? '');
+            }
+          },
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            margin: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: note.pinned ?? false
+                  ? Colors.blue
+                  : Theme.of(context).colorScheme.secondaryContainer,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  note.date ?? '',
+                  style: TextStyle(
+                    color: note.pinned ?? false
+                        ? Colors.white
+                        : Theme.of(context).colorScheme.secondary,
+                  ),
                 ),
-              ),
-              const VerticalSpacer(space: 6),
-              Text(
-                note.title ?? '',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: note.pinned ?? false
-                      ? Colors.white
-                      : Theme.of(context).colorScheme.secondary,
-                  fontSize: 23,
+                const VerticalSpacer(space: 6),
+                Text(
+                  note.title ?? '',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: note.pinned ?? false
+                        ? Colors.white
+                        : Theme.of(context).colorScheme.secondary,
+                    fontSize: 23,
+                  ),
                 ),
-              ),
-              const VerticalSpacer(space: 6),
-              Text(
-                note.details ?? '',
-                style: TextStyle(
-                  color: note.pinned ?? false
-                      ? Colors.white
-                      : Theme.of(context).colorScheme.secondary,
-                  fontSize: 13,
+                const VerticalSpacer(space: 6),
+                Text(
+                  note.details ?? '',
+                  style: TextStyle(
+                    color: note.pinned ?? false
+                        ? Colors.white
+                        : Theme.of(context).colorScheme.secondary,
+                    fontSize: 13,
+                  ),
                 ),
-              ),
-              const VerticalSpacer(space: 6),
-              // ListView(
-              //   scrollDirection: Axis.horizontal,
-              //   children: [],
-              // ),
-              Row(
-                children: [
-                  for (var item in note.techs ?? [])
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: note.pinned ?? false
-                            ? Colors.white
-                            : Colors.grey[300],
-                      ),
-                      child: Text(
-                        item,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12),
-                      ),
-                    )
-                ],
-              )
-            ],
+                const VerticalSpacer(space: 6),
+                // ListView(
+                //   scrollDirection: Axis.horizontal,
+                //   children: [],
+                // ),
+                Row(
+                  children: [
+                    for (var item in note.techs ?? [])
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: note.pinned ?? false
+                              ? Colors.white
+                              : Colors.grey[300],
+                        ),
+                        child: Text(
+                          item,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12),
+                        ),
+                      )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
         Positioned(
           right: context.currentLocale?.languageCode == 'en' ? 38 : 340,
           top: 25,
           child: GestureDetector(
-            onTap: () {
-              if (kDebugMode) {
-                print(currentIndex);
-                print(note.pinned);
-              }
-            },
+            onTap: () {},
             child: Container(
               width: 40,
               height: 40,
@@ -109,7 +125,10 @@ class NotesWidget extends StatelessWidget {
                 alignment: Alignment.center,
                 child: SvgPicture.asset(
                   AppAssets.pinOutlined,
-                  color: note.pinned ?? false ? Colors.white : Colors.black,
+                  colorFilter: ColorFilter.mode(
+                    note.pinned ?? false ? Colors.white : Colors.black,
+                    BlendMode.srcIn,
+                  ),
                   height: 15,
                   width: 15,
                 ),

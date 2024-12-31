@@ -7,7 +7,7 @@ import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/utils/add_edit_label_dialog.dart';
 import 'package:arfoon_note/frontend/widgets/add_notes_widget.dart';
 import 'package:arfoon_note/frontend/widgets/menu.dart';
-import 'package:arfoon_note/theme/theme_provider.dart';
+import 'package:arfoon_note/frontend/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
@@ -124,6 +124,7 @@ class _HomeViewState extends State<HomeView> {
       );
     }
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       key: key,
       drawer: const Menu(),
       appBar: AppBar(
@@ -134,18 +135,13 @@ class _HomeViewState extends State<HomeView> {
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Consumer<ThemeProvider>(
-                builder: (context, themeProvider, child) {
-              return SvgPicture.asset(
-                AppAssets.menu,
-                colorFilter: ColorFilter.mode(
-                  themeProvider.currentTheme == AppTheme.dark
-                      ? Colors.white
-                      : Colors.black,
-                  BlendMode.srcIn,
-                ),
-              );
-            }),
+            child: SvgPicture.asset(
+              AppAssets.menu,
+              colorFilter: ColorFilter.mode(
+                Theme.of(context).colorScheme.secondary,
+                BlendMode.srcIn,
+              ),
+            ),
           ),
         ),
         centerTitle: true,
@@ -166,13 +162,19 @@ class _HomeViewState extends State<HomeView> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const AddNoteScreen(isPhone: true),
+                builder: (context) => const AddNoteScreen(),
               ));
         },
         tooltip: 'Add Note',
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
-        child: SvgPicture.asset(AppAssets.addNew),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        foregroundColor: Theme.of(context).colorScheme.primary,
+        child: SvgPicture.asset(
+          AppAssets.addNew,
+          colorFilter: ColorFilter.mode(
+            Theme.of(context).colorScheme.primary,
+            BlendMode.srcIn,
+          ),
+        ),
       ),
     );
   }
