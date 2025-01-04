@@ -6,11 +6,9 @@ import 'package:arfoon_note/frontend/features/home/notes_list.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/widgets/add_notes_widget.dart';
 import 'package:arfoon_note/frontend/widgets/menu.dart';
-import 'package:arfoon_note/frontend/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 
 class HomeDesktopView extends StatelessWidget {
   const HomeDesktopView({
@@ -22,7 +20,7 @@ class HomeDesktopView extends StatelessWidget {
   final Future<Label?> Function()? onNewLabel;
   final Future<List<Note>> Function(Filter filter, bool isSearchedByLabel)
       getNotes;
-  final Future<List<Label>> Function(Filter filter) getLabels;
+  final Future<List<Label>> Function() getLabels;
 
   @override
   Widget build(BuildContext context) {

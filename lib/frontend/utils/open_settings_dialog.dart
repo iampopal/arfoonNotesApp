@@ -1,6 +1,7 @@
 import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
 import 'package:arfoon_note/frontend/frontend.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
+import 'package:arfoon_note/frontend/theme/theme_provider.dart';
 import 'package:arfoon_note/frontend/utils/utils.dart';
 import 'package:arfoon_note/frontend/providers/theme_provider.dart';
 import 'package:flutter/material.dart';

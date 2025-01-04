@@ -6,6 +6,7 @@ import 'package:arfoon_note/client/client.dart';
 import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
 import 'package:arfoon_note/frontend/components/shimmers/home_example_shimmers.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
+import 'package:arfoon_note/frontend/theme/theme_provider.dart';
 import 'package:arfoon_note/frontend/widgets/filters_widget.dart';
 import 'package:arfoon_note/frontend/widgets/notes_widget.dart';
 import 'package:arfoon_note/frontend/providers/theme_provider.dart';
@@ -24,7 +25,7 @@ class NotesList extends StatefulWidget {
   });
   final Future<List<Note>> Function(Filter filter, bool isSearchedByLabel)
       getNotes;
-  final Future<List<Label>> Function(Filter filter) getLabels;
+  final Future<List<Label>> Function() getLabels;
 
   @override
   State<NotesList> createState() => _NotesListState();
@@ -51,18 +52,13 @@ class _NotesListState extends State<NotesList> {
     }
   }
 
-  _getLabels({String? search}) async {
+  _getLabels() async {
     try {
       setState(() {
         error = null;
         loading = true;
       });
-      labels = await widget.getLabels(
-        Filter(
-          page: 0,
-          search: search,
-        ),
-      );
+      labels = await widget.getLabels();
       if (labels.isEmpty) {
         labels.insert(
           0,

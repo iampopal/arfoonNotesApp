@@ -7,11 +7,9 @@ import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/utils/add_edit_label_dialog.dart';
 import 'package:arfoon_note/frontend/widgets/add_notes_widget.dart';
 import 'package:arfoon_note/frontend/widgets/menu.dart';
-import 'package:arfoon_note/frontend/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 
 extension ContextExt on BuildContext {
   bool get isDesktop => MediaQuery.of(this).size.width > 1100;
@@ -28,7 +26,7 @@ class HomeView extends StatefulWidget {
   final Future<Label?> Function()? onNewLabel;
   final Future<List<Note>> Function(Filter filter, bool isSearchedByLabel)
       getNotes;
-  final Future<List<Label>> Function(Filter filter) getLabels;
+  final Future<List<Label>> Function() getLabels;
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -69,7 +67,7 @@ class _HomeViewState extends State<HomeView> {
           }
           return FakeData().notes;
         },
-        getLabels: (filter) async {
+        getLabels: () async {
           await Future.delayed(const Duration(milliseconds: 1));
           return FakeData().labels;
         },
@@ -111,7 +109,7 @@ class _HomeViewState extends State<HomeView> {
           }
           return FakeData().notes;
         },
-        getLabels: (filter) async {
+        getLabels: () async {
           await Future.delayed(const Duration(milliseconds: 1));
           return FakeData().labels;
         },

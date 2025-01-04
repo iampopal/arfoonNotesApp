@@ -1,5 +1,4 @@
 import 'package:arfoon_note/frontend/frontend.dart';
-import 'package:arfoon_note/frontend/providers/theme_provider.dart';
 import 'package:arfoon_note/integration/pages/home_page.dart';
 import 'package:flutter/widgets.dart';
 

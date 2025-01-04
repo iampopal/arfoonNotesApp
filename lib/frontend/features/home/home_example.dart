@@ -15,16 +15,8 @@ class _HomeExampleState extends State<HomeExample> {
   @override
   Widget build(BuildContext context) {
     return HomeView(
-      getLabels: (filter) async {
+      getLabels: () async {
         await Future.delayed(const Duration(milliseconds: 2));
-        // if ((filter.search ?? '').isNotEmpty) {
-        //   var list = FakeData()
-        //       .labels
-        //       .where((e) =>
-        //           e.name.toLowerCase().contains(filter.search!.toLowerCase()))
-        //       .toList();
-        //   return list;
-        // }
         return FakeData().labels;
       },
       getNotes: (filter, isSearchedByLabel) async {

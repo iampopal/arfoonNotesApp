@@ -1,5 +1,4 @@
 // ignore_for_file: file_names
-import 'dart:io';
 
 import 'package:arfoon_note/client/client.dart';
 import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
@@ -7,7 +6,6 @@ import 'package:arfoon_note/frontend/features/features.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/providers/notes_provider.dart';
 import 'package:arfoon_note/frontend/widgets/add_notes_widget.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
