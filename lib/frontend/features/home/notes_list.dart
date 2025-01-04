@@ -9,6 +9,7 @@ import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/theme/theme_provider.dart';
 import 'package:arfoon_note/frontend/widgets/filters_widget.dart';
 import 'package:arfoon_note/frontend/widgets/notes_widget.dart';
+import 'package:arfoon_note/frontend/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
@@ -101,9 +102,11 @@ class _NotesListState extends State<NotesList> {
     } catch (e) {
       error = e.toString();
     } finally {
-      setState(() {
-        loading = false;
-      });
+      if (mounted) {
+        setState(() {
+          loading = false;
+        });
+      }
     }
   }
 
@@ -120,14 +123,15 @@ class _NotesListState extends State<NotesList> {
 
   @override
   void dispose() {
-    _scrollController.dispose();
     super.dispose();
+    _scrollController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           widget.isPhone
               ? const Visibility(
@@ -154,7 +158,13 @@ class _NotesListState extends State<NotesList> {
                         ),
                         child: Row(
                           children: [
-                            SvgPicture.asset(AppAssets.addNew),
+                            SvgPicture.asset(
+                              AppAssets.addNew,
+                              colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.primary,
+                                BlendMode.srcIn,
+                              ),
+                            ),
                             const Text('New'),
                           ],
                         ),
@@ -169,24 +179,20 @@ class _NotesListState extends State<NotesList> {
               onFieldSubmitted: (s) {
                 _getNotes(search: s);
               },
+              keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),
                 ),
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Consumer<ThemeProvider>(
-                      builder: (context, themeProvider, child) {
-                    return SvgPicture.asset(
-                      AppAssets.search,
-                      colorFilter: ColorFilter.mode(
-                        themeProvider.currentTheme == AppTheme.dark
-                            ? Colors.white
-                            : Colors.black,
-                        BlendMode.srcIn,
-                      ),
-                    );
-                  }),
+                  child: SvgPicture.asset(
+                    AppAssets.search,
+                    colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.secondary,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                 ),
                 hintText: Locales.string(context, "search_notes"),
               ),

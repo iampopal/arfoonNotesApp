@@ -6,8 +6,11 @@ import 'package:arfoon_note/frontend/features/home/notes_list.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/widgets/add_notes_widget.dart';
 import 'package:arfoon_note/frontend/widgets/menu.dart';
+import 'package:arfoon_note/frontend/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class HomeDesktopView extends StatelessWidget {
   const HomeDesktopView({
@@ -24,22 +27,34 @@ class HomeDesktopView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
+        elevation: 0,
         title: Row(
           children: [
-            SizedBox(
-              height: 30,
-              width: 30,
-              child: SvgPicture.asset(
-                AppAssets.logo,
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: SizedBox(
+                height: 30,
+                width: 30,
+                child: SvgPicture.asset(
+                  AppAssets.logo,
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.secondary,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
             ),
             const HorizontalSpacer(space: 5),
-            const Text(
-              'Arfoon Note',
+            Text(
+              Locales.string(context, 'arfoon_notes'),
               style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
+                color: Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.bold,
+                // fontSize: 30,
               ),
             ),
           ],
@@ -50,6 +65,7 @@ class HomeDesktopView extends StatelessWidget {
       ),
       body: Row(
         mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             flex: 3,
@@ -71,7 +87,7 @@ class HomeDesktopView extends StatelessWidget {
           ),
           const Expanded(
             flex: 6,
-            child: AddNoteScreen(isPhone: false),
+            child: AddNoteScreen(),
           )
         ],
       ),

@@ -3,6 +3,7 @@ import 'package:arfoon_note/frontend/frontend.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/theme/theme_provider.dart';
 import 'package:arfoon_note/frontend/utils/utils.dart';
+import 'package:arfoon_note/frontend/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
@@ -44,9 +45,7 @@ class _OpenSettingsDialogState extends State<OpenSettingsDialog> {
               height: 60,
               width: 60,
               colorFilter: ColorFilter.mode(
-                themeProvider.currentTheme == AppTheme.dark
-                    ? Colors.white
-                    : Colors.black,
+                Theme.of(context).colorScheme.secondary,
                 BlendMode.srcIn,
               ),
             ),

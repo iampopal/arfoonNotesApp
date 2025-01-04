@@ -11,6 +11,7 @@ import 'package:arfoon_note/frontend/utils/add_edit_label_dialog.dart';
 import 'package:arfoon_note/frontend/utils/add_profile_label_dialog.dart';
 import 'package:arfoon_note/frontend/utils/open_settings_dialog.dart';
 import 'package:arfoon_note/integration/constants.dart';
+import 'package:arfoon_note/frontend/providers/theme_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
@@ -33,7 +34,8 @@ class _MenuState extends State<Menu> {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
         return Drawer(
-          // backgroundColor: const Color.fromARGB(255, 241, 239, 239),
+          // backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+          elevation: 0,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: SafeArea(
@@ -46,19 +48,14 @@ class _MenuState extends State<Menu> {
                         onTap: () {
                           Navigator.pop(context);
                         },
-                        child: Consumer<ThemeProvider>(
-                          builder: (context, themeProvider, child) {
-                            return SvgPicture.asset(
-                              AppAssets.logo,
-                              height: 45,
-                              width: 45,
-                              colorFilter: ColorFilter.mode(
-                                  themeProvider.currentTheme == AppTheme.dark
-                                      ? Colors.white
-                                      : Colors.black,
-                                  BlendMode.srcIn),
-                            );
-                          },
+                        child: SvgPicture.asset(
+                          AppAssets.logo,
+                          height: 45,
+                          width: 45,
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.secondary,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ),
                       const VerticalSpacer(space: 5),
@@ -105,30 +102,20 @@ class _MenuState extends State<Menu> {
                       style: ListTileStyle.list,
                       tileColor: Theme.of(context).colorScheme.primary,
                       title: Text(Locales.string(context, 'all_notes')),
-                      leading: Consumer<ThemeProvider>(
-                          builder: (context, themeProvider, child) {
-                        return SvgPicture.asset(
-                          AppAssets.allNotes,
-                          height: 22,
-                          width: 22,
-                          colorFilter: ColorFilter.mode(
-                            themeProvider.currentTheme == AppTheme.dark
-                                ? Colors.white
-                                : Colors.black,
-                            BlendMode.srcIn,
-                          ),
-                        );
-                      }),
-                      trailing: Consumer<ThemeProvider>(
-                          builder: (context, themeProvider, child) {
-                        return Icon(
-                          Icons.arrow_forward_ios_outlined,
-                          size: 22,
-                          color: themeProvider.currentTheme == AppTheme.dark
-                              ? Colors.white
-                              : Colors.black,
-                        );
-                      }),
+                      leading: SvgPicture.asset(
+                        AppAssets.allNotes,
+                        height: 22,
+                        width: 22,
+                        colorFilter: ColorFilter.mode(
+                          Theme.of(context).colorScheme.secondary,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        size: 22,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
                     ),
                   ),
                   const VerticalSpacer(space: 20),
@@ -144,20 +131,15 @@ class _MenuState extends State<Menu> {
                           style: ListTileStyle.list,
                           tileColor: Theme.of(context).primaryColor,
                           title: Text(label.name),
-                          leading: Consumer<ThemeProvider>(
-                              builder: (context, themeProvider, child) {
-                            return SvgPicture.asset(
-                              AppAssets.label,
-                              height: 22,
-                              width: 22,
-                              colorFilter: ColorFilter.mode(
-                                themeProvider.currentTheme == AppTheme.dark
-                                    ? Colors.white
-                                    : Colors.black,
-                                BlendMode.srcIn,
-                              ),
-                            );
-                          }),
+                          leading: SvgPicture.asset(
+                            AppAssets.label,
+                            height: 22,
+                            width: 22,
+                            colorFilter: ColorFilter.mode(
+                              Theme.of(context).colorScheme.secondary,
+                              BlendMode.srcIn,
+                            ),
+                          ),
                           trailing: GestureDetector(
                             onTap: () {
                               AddEditLabelDialog(
@@ -165,20 +147,15 @@ class _MenuState extends State<Menu> {
                                 label: Label(name: label.name),
                               ).show(context: context);
                             },
-                            child: Consumer<ThemeProvider>(
-                                builder: (context, themeProvider, child) {
-                              return SvgPicture.asset(
-                                AppAssets.edit,
-                                height: 22,
-                                width: 22,
-                                colorFilter: ColorFilter.mode(
-                                  themeProvider.currentTheme == AppTheme.dark
-                                      ? Colors.white
-                                      : Colors.black,
-                                  BlendMode.srcIn,
-                                ),
-                              );
-                            }),
+                            child: SvgPicture.asset(
+                              AppAssets.edit,
+                              height: 22,
+                              width: 22,
+                              colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.secondary,
+                                BlendMode.srcIn,
+                              ),
+                            ),
                           ),
                         ),
                         const VerticalSpacer(space: 10),
@@ -186,43 +163,38 @@ class _MenuState extends State<Menu> {
                     ],
                   ),
                   const VerticalSpacer(space: 50),
-                  if (widget.onNewLabel == null)
-                    ListTile(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      style: ListTileStyle.list,
-                      tileColor: Theme.of(context).primaryColor,
-                      title: Text(Locales.string(context, "add_label")),
-                      leading: Consumer<ThemeProvider>(
-                          builder: (context, themeProvider, child) {
-                        return SvgPicture.asset(
-                          AppAssets.addLabel,
-                          height: 22,
-                          width: 22,
-                          colorFilter: ColorFilter.mode(
-                            themeProvider.currentTheme == AppTheme.dark
-                                ? Colors.white
-                                : Colors.black,
-                            BlendMode.srcIn,
-                          ),
-                        );
-                      }),
-                      onTap: () {
-                        AddEditLabelDialog(
-                          onSubmit: (label) async {
-                            await Future.delayed(const Duration(seconds: 1));
-                            // Navigator.pop(context);
-                            if (kDebugMode) {
-                              log('------->label =  ${label.name}');
-                            }
-                          },
-                        ).show(context: context);
-                        widget.onNewLabel?.call().then((v) {
-                          //todo: if save label then get labels form db
-                        });
-                      },
+                  // if (widget.onNewLabel == null)
+                  ListTile(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
+                    style: ListTileStyle.list,
+                    tileColor: Theme.of(context).primaryColor,
+                    title: Text(Locales.string(context, "add_label")),
+                    leading: SvgPicture.asset(
+                      AppAssets.addLabel,
+                      height: 22,
+                      width: 22,
+                      colorFilter: ColorFilter.mode(
+                        Theme.of(context).colorScheme.secondary,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    onTap: () {
+                      AddEditLabelDialog(
+                        onSubmit: (label) async {
+                          await Future.delayed(const Duration(seconds: 1));
+                          // Navigator.pop(context);
+                          if (kDebugMode) {
+                            log('------->label =  ${label.name}');
+                          }
+                        },
+                      ).show(context: context);
+                      widget.onNewLabel?.call().then((v) {
+                        //todo: if save label then get labels form db
+                      });
+                    },
+                  ),
                   const VerticalSpacer(space: 10),
                   ListTile(
                     shape: RoundedRectangleBorder(
@@ -231,20 +203,15 @@ class _MenuState extends State<Menu> {
                     style: ListTileStyle.list,
                     tileColor: Theme.of(context).primaryColor,
                     title: Text(Locales.string(context, 'settings')),
-                    leading: Consumer<ThemeProvider>(
-                        builder: (context, themeProvider, child) {
-                      return SvgPicture.asset(
-                        AppAssets.settings,
-                        height: 22,
-                        width: 22,
-                        colorFilter: ColorFilter.mode(
-                          themeProvider.currentTheme == AppTheme.dark
-                              ? Colors.white
-                              : Colors.black,
-                          BlendMode.srcIn,
-                        ),
-                      );
-                    }),
+                    leading: SvgPicture.asset(
+                      AppAssets.settings,
+                      height: 22,
+                      width: 22,
+                      colorFilter: ColorFilter.mode(
+                        Theme.of(context).colorScheme.secondary,
+                        BlendMode.srcIn,
+                      ),
+                    ),
                     onTap: () {
                       OpenSettingsDialog(
                         themeMode: themeProvider.currentTheme == AppTheme.dark
@@ -292,18 +259,12 @@ class _MenuState extends State<Menu> {
                           ],
                         ),
                         const HorizontalSpacer(space: 50),
-                        Consumer<ThemeProvider>(
-                          builder: (context, themeProvider, child) {
-                            return SvgPicture.asset(
-                              AppAssets.dropdown,
-                              colorFilter: ColorFilter.mode(
-                                themeProvider.currentTheme == AppTheme.dark
-                                    ? Colors.white
-                                    : Colors.black,
-                                BlendMode.srcIn,
-                              ),
-                            );
-                          },
+                        SvgPicture.asset(
+                          AppAssets.dropdown,
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.secondary,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ],
                     ),
