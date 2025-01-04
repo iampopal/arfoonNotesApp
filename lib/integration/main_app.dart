@@ -1,4 +1,5 @@
 import 'package:arfoon_note/frontend/frontend.dart';
+import 'package:arfoon_note/frontend/providers/theme_provider.dart';
 import 'package:arfoon_note/integration/pages/home_page.dart';
 import 'package:flutter/widgets.dart';
 
@@ -12,6 +13,9 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
-    return const FrontendApp(home: HomePage());
+    return const FrontendApp(
+      home: HomePage(),
+      currentTheme: 'Light',
+    );
   }
 }

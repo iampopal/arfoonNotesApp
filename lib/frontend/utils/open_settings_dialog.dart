@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
 class OpenSettingsDialog extends StatefulWidget {
@@ -125,16 +126,24 @@ class _OpenSettingsDialogState extends State<OpenSettingsDialog> {
                   //border: OutlineInputBorder(),
                 ),
                 iconSize: 20,
-                onChanged: (value) {
+                onChanged: (value) async {
+                  SharedPreferences preferences =
+                      await SharedPreferences.getInstance();
                   widget.themeMode = value;
                   if (widget.themeMode == 'Light') {
                     themeProvider.toggleTheme(ThemeData.light());
-                  } else {
+                  } else if (widget.themeMode == 'Dark') {
                     themeProvider.toggleTheme(ThemeData.dark());
+                  } else {
+                    themeProvider.currentTheme = AppTheme.system;
                   }
+                  preferences.setString(
+                      'theme', themeProvider.currentTheme.name);
                 },
                 onSaved: (newValue) {
-                  widget.themeMode = newValue;
+                  setState(() {
+                    widget.themeMode = newValue;
+                  });
                 },
                 value: widget.themeMode,
               ),

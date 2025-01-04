@@ -212,10 +212,16 @@ class _MenuState extends State<Menu> {
                       ),
                     ),
                     onTap: () {
+                      String? currentTheme;
+                      if (themeProvider.currentTheme == AppTheme.dark) {
+                        currentTheme = 'Dark';
+                      } else if (themeProvider.currentTheme == AppTheme.light) {
+                        currentTheme = 'Light';
+                      } else {
+                        currentTheme = 'System Theme';
+                      }
                       OpenSettingsDialog(
-                        themeMode: themeProvider.currentTheme == AppTheme.dark
-                            ? 'Dark'
-                            : 'Light',
+                        themeMode: currentTheme,
                         languageCode:
                             Locales.currentLocale(context)?.languageCode ??
                                 "en",

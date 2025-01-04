@@ -4,7 +4,7 @@ import 'package:arfoon_note/theme/dark_theme.dart';
 import 'package:arfoon_note/theme/light_theme.dart';
 import 'package:flutter/material.dart';
 
-enum AppTheme { light, dark }
+enum AppTheme { light, dark, system }
 
 class ThemeProvider with ChangeNotifier {
   final ThemeData _theme = ThemeData.light();
@@ -26,8 +26,10 @@ class ThemeProvider with ChangeNotifier {
     } else if (isDark == false) {
       themeMode = ThemeMode.dark;
       currentTheme = AppTheme.dark;
-    } else {
+    }
+    if (currentTheme == AppTheme.system) {
       themeMode = ThemeMode.system;
+      currentTheme = AppTheme.system;
     }
     notifyListeners();
   }

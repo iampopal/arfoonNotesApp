@@ -7,8 +7,10 @@ import 'package:flutter_locales/flutter_locales.dart';
 import 'package:provider/provider.dart';
 
 class FrontendApp extends StatelessWidget {
-  const FrontendApp({super.key, required this.home});
+  const FrontendApp(
+      {super.key, required this.home, required this.currentTheme});
   final Widget home;
+  final String currentTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,11 @@ class FrontendApp extends StatelessWidget {
         ],
         builder: (context, child) {
           final provider = Provider.of<ThemeProvider>(context);
+          // if (currentTheme == 'Light') {
+          //   provider.currentTheme = AppTheme.light;
+          // } else {
+          //   provider.currentTheme = AppTheme.dark;
+          // }
           return MaterialApp(
             localizationsDelegates: Locales.delegates,
             supportedLocales: Locales.supportedLocales,

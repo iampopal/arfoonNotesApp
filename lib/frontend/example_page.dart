@@ -8,6 +8,7 @@ import 'package:arfoon_note/frontend/providers/theme_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
+import 'package:provider/provider.dart';
 
 class ExamplePage extends StatefulWidget {
   const ExamplePage({super.key});
@@ -19,6 +20,7 @@ class ExamplePage extends StatefulWidget {
 class _MyHomePageState extends State<ExamplePage> {
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
@@ -68,10 +70,16 @@ class _MyHomePageState extends State<ExamplePage> {
           InkWell(
             splashColor: Colors.black12,
             onTap: () {
+              String? currentTheme;
+              if (themeProvider.currentTheme == AppTheme.dark) {
+                currentTheme = 'Dark';
+              } else if (themeProvider.currentTheme == AppTheme.light) {
+                currentTheme = 'Light';
+              } else {
+                currentTheme = 'System Theme';
+              }
               OpenSettingsDialog(
-                themeMode: ThemeProvider().currentTheme == AppTheme.dark
-                    ? 'Dark'
-                    : 'Light',
+                themeMode: currentTheme,
                 languageCode:
                     Locales.currentLocale(context)?.languageCode ?? "en",
               ).show(context: context);

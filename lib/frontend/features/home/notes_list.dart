@@ -133,6 +133,7 @@ class _NotesListState extends State<NotesList> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController notesSearchController = TextEditingController();
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -183,6 +184,7 @@ class _NotesListState extends State<NotesList> {
               onFieldSubmitted: (s) {
                 _getNotes(search: s);
               },
+              controller: notesSearchController,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
