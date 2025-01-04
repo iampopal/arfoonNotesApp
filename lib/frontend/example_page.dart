@@ -1,7 +1,6 @@
 import 'package:arfoon_note/client/client.dart';
 import 'package:arfoon_note/frontend/data/data.dart';
 import 'package:arfoon_note/frontend/features/home/home_example.dart';
-import 'package:arfoon_note/frontend/theme/theme_provider.dart';
 import 'package:arfoon_note/frontend/utils/add_edit_label_dialog.dart';
 import 'package:arfoon_note/frontend/utils/add_profile_label_dialog.dart';
 import 'package:arfoon_note/frontend/utils/open_settings_dialog.dart';

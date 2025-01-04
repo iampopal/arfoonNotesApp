@@ -6,7 +6,6 @@ import 'package:arfoon_note/frontend/components/HorizontalSpacer.dart';
 import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
 import 'package:arfoon_note/frontend/frontend.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
-import 'package:arfoon_note/frontend/theme/theme_provider.dart';
 import 'package:arfoon_note/frontend/utils/add_edit_label_dialog.dart';
 import 'package:arfoon_note/frontend/utils/add_profile_label_dialog.dart';
 import 'package:arfoon_note/frontend/utils/open_settings_dialog.dart';
