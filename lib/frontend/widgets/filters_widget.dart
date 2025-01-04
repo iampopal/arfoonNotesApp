@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:arfoon_note/client/models/label.dart';
-import 'package:arfoon_note/theme/theme_provider.dart';
+import 'package:arfoon_note/frontend/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

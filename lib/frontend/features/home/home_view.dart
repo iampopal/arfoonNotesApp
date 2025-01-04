@@ -4,10 +4,10 @@ import 'package:arfoon_note/frontend/features/home/home_desktop_view.dart';
 import 'package:arfoon_note/frontend/features/home/home_tablet_view.dart';
 import 'package:arfoon_note/frontend/features/home/notes_list.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
+import 'package:arfoon_note/frontend/theme/theme_provider.dart';
 import 'package:arfoon_note/frontend/utils/add_edit_label_dialog.dart';
 import 'package:arfoon_note/frontend/widgets/add_notes_widget.dart';
 import 'package:arfoon_note/frontend/widgets/menu.dart';
-import 'package:arfoon_note/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
@@ -69,7 +69,7 @@ class _HomeViewState extends State<HomeView> {
           }
           return FakeData().notes;
         },
-        getLabels: (filter) async {
+        getLabels: () async {
           await Future.delayed(const Duration(milliseconds: 1));
           return FakeData().labels;
         },
@@ -111,7 +111,7 @@ class _HomeViewState extends State<HomeView> {
           }
           return FakeData().notes;
         },
-        getLabels: (filter) async {
+        getLabels: () async {
           await Future.delayed(const Duration(milliseconds: 1));
           return FakeData().labels;
         },

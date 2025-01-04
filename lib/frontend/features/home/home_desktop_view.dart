@@ -19,7 +19,7 @@ class HomeDesktopView extends StatelessWidget {
   final Future<Label?> Function()? onNewLabel;
   final Future<List<Note>> Function(Filter filter, bool isSearchedByLabel)
       getNotes;
-  final Future<List<Label>> Function(Filter filter) getLabels;
+  final Future<List<Label>> Function() getLabels;
 
   @override
   Widget build(BuildContext context) {
