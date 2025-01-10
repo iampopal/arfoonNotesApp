@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:arfoon_note/client/client.dart';
 import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
 import 'package:arfoon_note/frontend/components/shimmers/home_example_shimmers.dart';
+import 'package:arfoon_note/frontend/features/features.dart';
 import 'package:arfoon_note/frontend/helpers/appAssets.dart';
 import 'package:arfoon_note/frontend/widgets/filters_widget.dart';
 import 'package:arfoon_note/frontend/widgets/notes_widget.dart';
@@ -15,10 +16,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class NotesList extends StatefulWidget {
-  final bool isPhone;
+  // final bool isPhone;
   const NotesList({
     super.key,
-    required this.isPhone,
+    // required this.isPhone,
     required this.getNotes,
     required this.getLabels,
   });
@@ -133,7 +134,7 @@ class _NotesListState extends State<NotesList> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          widget.isPhone
+          !context.isTablet || !context.isDesktop
               ? const Visibility(
                   visible: false,
                   child: SizedBox(),

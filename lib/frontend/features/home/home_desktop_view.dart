@@ -77,7 +77,7 @@ class HomeDesktopView extends StatelessWidget {
                 right: BorderSide(width: 0.3),
               )),
               child: NotesList(
-                isPhone: false,
+                // isPhone: false,
                 getNotes: getNotes,
                 getLabels: getLabels,
               ),

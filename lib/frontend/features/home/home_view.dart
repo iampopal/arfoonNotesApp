@@ -151,7 +151,7 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
       body: NotesList(
-        isPhone: true,
+        // isPhone: true,
         getNotes: widget.getNotes,
         getLabels: widget.getLabels,
       ),

@@ -1,15 +1,17 @@
-import 'package:arfoon_note/client/client.dart';
-import 'package:arfoon_note/frontend/data/data.dart';
-import 'package:arfoon_note/frontend/features/home/home_example.dart';
-import 'package:arfoon_note/frontend/utils/add_edit_label_dialog.dart';
-import 'package:arfoon_note/frontend/utils/add_profile_label_dialog.dart';
-import 'package:arfoon_note/frontend/utils/open_settings_dialog.dart';
-import 'package:arfoon_note/frontend/widgets/examples_widget.dart';
-import 'package:arfoon_note/frontend/providers/theme_provider.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:provider/provider.dart';
+
+import 'package:arfoon_note/client/client.dart';
+import 'package:arfoon_note/frontend/data/data.dart';
+import 'package:arfoon_note/frontend/features/home/home_example.dart';
+import 'package:arfoon_note/frontend/providers/theme_provider.dart';
+import 'package:arfoon_note/frontend/utils/add_edit_label_dialog.dart';
+import 'package:arfoon_note/frontend/utils/add_profile_label_dialog.dart';
+import 'package:arfoon_note/frontend/utils/open_settings_dialog.dart';
+import 'package:arfoon_note/frontend/widgets/examples_widget.dart';
 
 class ExamplePage extends StatefulWidget {
   const ExamplePage({super.key});
@@ -35,9 +37,9 @@ class _MyHomePageState extends State<ExamplePage> {
       ),
       body: ListView(
         children: [
-          InkWell(
-            splashColor: Colors.black12,
-            onTap: () {
+          exampleButton(
+            context,
+            () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -45,14 +47,13 @@ class _MyHomePageState extends State<ExamplePage> {
                 ),
               );
             },
-            child: ExampleWidget(
-              data: FakeData().examplesData[0],
-              currentIndex: 0,
-            ),
+            FakeData().examplesData[0].title,
+            FakeData().examplesData[0].subTitle,
+            0,
           ),
-          InkWell(
-            splashColor: Colors.black12,
-            onTap: () {
+          exampleButton(
+            context,
+            () {
               AddProfileLabelDialog(
                 onSubmit: (label) async {
                   await Future.delayed(const Duration(seconds: 1));
@@ -63,14 +64,13 @@ class _MyHomePageState extends State<ExamplePage> {
                 },
               ).show(context: context);
             },
-            child: ExampleWidget(
-              data: FakeData().examplesData[1],
-              currentIndex: 1,
-            ),
+            FakeData().examplesData[1].title,
+            FakeData().examplesData[1].subTitle,
+            1,
           ),
-          InkWell(
-            splashColor: Colors.black12,
-            onTap: () {
+          exampleButton(
+            context,
+            () {
               String? currentTheme;
               if (themeProvider.currentTheme == AppTheme.dark) {
                 currentTheme = 'Dark';
@@ -85,14 +85,13 @@ class _MyHomePageState extends State<ExamplePage> {
                     Locales.currentLocale(context)?.languageCode ?? "en",
               ).show(context: context);
             },
-            child: ExampleWidget(
-              data: FakeData().examplesData[2],
-              currentIndex: 2,
-            ),
+            FakeData().examplesData[2].title,
+            FakeData().examplesData[2].subTitle,
+            2,
           ),
-          InkWell(
-            splashColor: Colors.black12,
-            onTap: () {
+          exampleButton(
+            context,
+            () {
               AddEditLabelDialog(
                 onDelete: (l) async {},
                 label: Label(name: 'Yess'),
@@ -105,21 +104,32 @@ class _MyHomePageState extends State<ExamplePage> {
                 },
               ).show(context: context);
             },
-            child: ExampleWidget(
-              data: FakeData().examplesData[3],
-              currentIndex: 3,
-            ),
+            FakeData().examplesData[3].title,
+            FakeData().examplesData[3].subTitle,
+            3,
           ),
-          InkWell(
-            splashColor: Colors.black12,
-            onTap: () {},
-            child: ExampleWidget(
-              data: FakeData().examplesData[4],
-              currentIndex: 4,
-            ),
+          exampleButton(
+            context,
+            () {},
+            FakeData().examplesData[4].title,
+            FakeData().examplesData[4].subTitle,
+            4,
           ),
         ],
       ),
     );
   }
+}
+
+InkWell exampleButton(BuildContext context, VoidCallback onTap, String? title,
+    String? details, int index) {
+  return InkWell(
+    splashColor: Colors.black12,
+    onTap: onTap,
+    child: ExampleWidget(
+      title: title ?? "",
+      details: details ?? "",
+      currentIndex: index,
+    ),
+  );
 }

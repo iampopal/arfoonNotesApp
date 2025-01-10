@@ -1,6 +1,4 @@
 // ignore_for_file: file_names
-
-import 'package:arfoon_note/client/models/examples_data.dart';
 import 'package:arfoon_note/frontend/components/VertialSpacer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
@@ -8,12 +6,14 @@ import 'package:flutter_locales/flutter_locales.dart';
 class ExampleWidget extends StatefulWidget {
   const ExampleWidget({
     super.key,
-    required this.data,
+    required this.title,
+    required this.details,
     required this.currentIndex,
   });
 
-  final ExamplesData data;
   final int currentIndex;
+  final String title;
+  final String details;
   bool isIndexEven(int num) {
     if ((num %= 2) == 0) {
       return true;
@@ -40,7 +40,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
         children: [
           const VerticalSpacer(space: 5),
           Text(
-            Locales.string(context, widget.data.title ?? ""),
+            Locales.string(context, widget.title),
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               // color: Colors.black,
@@ -49,7 +49,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
           ),
           const VerticalSpacer(space: 5),
           Text(
-            widget.data.subTitle ?? '',
+            widget.details,
             style: const TextStyle(
               fontWeight: FontWeight.w400,
               // color: Colors.black,

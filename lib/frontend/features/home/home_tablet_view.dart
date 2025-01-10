@@ -101,7 +101,7 @@ class _HomeTabletViewState extends State<HomeTabletView> {
                 right: BorderSide(width: 0.3),
               )),
               child: NotesList(
-                isPhone: false,
+                // isPhone: false,
                 getNotes: widget.getNotes,
                 getLabels: widget.getLabels,
               ),
